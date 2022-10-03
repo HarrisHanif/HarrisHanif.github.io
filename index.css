@@ -32,9 +32,9 @@ h1, h3, p{
 .chart{
     background-color: rgb(112,128,144);
     width:330px;
-    border-width: 10px;
+    border-width: 1px;
     border-style: solid;
-    border-radius: 5px;
+    border-radius: 1px;
     border-color: rgb(0,0,0);
 
     
