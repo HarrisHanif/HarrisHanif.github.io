@@ -31,19 +31,16 @@ h1, h3, p{
 /* Set the apperance of the class, chart */
 .chart{
     background-color: rgb(112,128,144);
-    width:330px;
+    width:40%;
     border-width: 1px;
     border-style: solid;
     border-radius: 0px;
     border-color: rgb(0,0,0);
+    margin-left: auto;
+    margin-right: auto;
 
     
 }
 
-#chart5{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
 
 
