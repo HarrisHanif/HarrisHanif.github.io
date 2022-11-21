@@ -29,7 +29,7 @@ h1, h3, p{
 
 
 /* Set the apperance of the class, chart */
-.chart{
+.chart {
     background-color: rgb(112,128,144);
     width:40%;
     border-width: 1px;
@@ -38,6 +38,8 @@ h1, h3, p{
     border-color: rgb(0,0,0);
     margin-left: auto;
     margin-right: auto;
+    align-content: center;
+    text-align: center;
 
     
 }
