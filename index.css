@@ -10,6 +10,8 @@
 /* Set the background color for my page: */
 body{
     background-color: rgb(119,136,153);
+    margin:auto
+    max-width: 1000px;
  
 }
 
