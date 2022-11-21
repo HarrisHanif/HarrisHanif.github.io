@@ -41,12 +41,9 @@ h1, h3, p{
 }
 
 #chart5{
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 15px;
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-#chart6{
-    margin-right: auto;
-    margin-left: auto;
-}
+
