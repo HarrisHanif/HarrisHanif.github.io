@@ -1,101 +1,69 @@
-/*  */
+/* Design for my home page*/
 
-/* This is my first proper css file */
+/* FONTS: */
+
+h1{
+    font-family: 'Noto Sans Mono', sans-serif;
+    text-align: center;
+    color:rgb(255, 255, 255);
+    background-color: #0049B7;
+}
+
+p{
+    font-family: 'Noto Sans Mono', sans-serif;
+    text-align: center;
+    font-size: larger;
+    color:rgb(255, 255, 255);
+    background-color: #0049B7;
+}
 
 
-/* Import a font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+/* AREAS OF THE PAGE */
 
-
-/* Set the background color for my page: */
 body{
-    background-color: rgb(119,136,153);
-    margin:auto;
+    background-color: #0049B7;
+}
+
+
+
+
+
+
+/* BUTTONS */
+
+.link{
+    background-color: rgba(132, 176, 230, 0.5);
+
+    padding:10px;
     
- 
-}
-
-
-/* Choose the appearance of the tags, h1, h3 and p: */
-h1, h3, p{
-    color:rgb(17, 17, 17);
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-}
-    
-.myWeek1{
-    margin: auto;
-    max-width: 600px;
-    background-color: rgb(119,136,153);
-}
-
-
-/* Set the apperance of the class, chart */
-.chart {
-    background-color: rgb(112,128,144);
-    width:40%;
-    border-width: 1px;
+    border:2px;
+    border-color:grey;
     border-style: solid;
-    border-radius: 0px;
-    border-color: rgb(0,0,0);
-    margin-left: auto;
-    margin-right: auto;
-    align-content: center;
-    text-align: center;
+    border-radius: 10px;
 
-
-    #Chart8{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart9{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart10{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart11{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart12{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart13{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart14{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-      #Chart15{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-    
-      #Chart16{
-        margin-bottom: 10px;
-        width: 10px;
-        margin-left: 120px;
-      }
-     .grid-container {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        width: 150%;
-    
+    font-family: 'Courier New', Courier, monospace;
+    font-weight:700;
+    color:white;
+    text-decoration: none;
+}
+.links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a{
+    border: 5px;
+    border-color: black;
+    border-style: solid;
+    margin: auto;
 }
 
+.link:hover{
 
+    background-color: #0049B7;
 
+    border:2px;
+    border-color:rgb(0, 0, 0);
+    border-style: solid;
+    
+}

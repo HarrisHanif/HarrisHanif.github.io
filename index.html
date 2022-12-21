@@ -6,133 +6,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Title for the page -->
-    <title>Document</title>
+    <title>Data Science - Home Page</title>
 
-    <!-- Link to my style sheet -->
+    <!--Main Stylesheet-->
     <link rel="stylesheet" href="index.css">
 
-    <!--The next three lines allow the Vega embed-->
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
 </head>
 
-
-
 <body>
-    <!-- A div that contains a group of items for week 1. Can be useful for setting background colours etc.  -->
-    <div class="myWeek1">
-        <h1>Data Science for Economists.</h1>
-        
-        
-    </div> 
 
+<div class="wrap">    
 
-<h2>Week 1</h2>
-        <p>the first task was to embed two charts onto my homepage</p>
+    <h1>Harris' Home Page</h1>    
 
-<!--First chart is the exchange rate between GBPUSD-->
+    <p>Welcome to my Data Science Home Page</p>
 
-    <h3>Exchange Rate</h3>
-            <p>The first chart tracks GBPUSD.</p>
-            <div class="chart" id="Chart1"> </div>
+</div>
 
-<!--the second charts compares borrowing costs in the UK against the US-->
-
-    <h3>Borrowing Costs</h3>
-            <p>The second chart compares borrowing costs in the UK and the US</p>
-            <div class="chart" id="Chart2"> </div>
-
-<h2>Week 2</h2>
-    <p>the second task was to replicate a chart from the FT and improve it</p>
-
-<!--Third chart is the original plot used by the FT-->
-
-    <h3>IMF Lending Outstanding</h3>
-<!--insert div and chart here-->
-
-<!--Fourth chart is updated version of IMF Lending. (as a % of global GDP)-->
-
-    <h3>IMF Lendning Updated</h3>
-<!--insert div and chart here-->
-
-<!--Analysis of Week 2 charts -->
-<p>insert text here...</p>
-
-<h2>Week 3</h2>
-<p>The third task was to add two more charts whereby, the second has imporved visual ecoding </p>
-
-<!--The fifth chart is the exchange rate against the US dollar of the G7 nations, excluding Japan.-->
-    <h3>Exchange Rate against the US dollar of G7 currencies (excluding Japan)</h3>
-    <div class="chart" id="Chart5"> </div>
-
-<!--The sixth chart is a line graph insetad of a stacked bar-->
-    <div class="chart" id="Chart6"> </div>
-
-<p>why the secocnd chart encoding is better than the first</p>
-
-<h2>Week 4</h2>
-<p>Implimenting a data scraaper of my own</p>
-
-<div class="chart" id="Chart7"> </div>
-
-<h2>Week 5</h2>
-<p>The fifth task was to use the ONS API to batch download nine different series as JSON files whose data can be used to create a series of related charts</p>
-
-<div class="grid-container" style = "display: grid;">
-    <div class="grid-item"><div class = dashchart id = "Chart8" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart9" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart10" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart11" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart12" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart13" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart14" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart15" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart16" style = "display: block;"></div></div>
-
+<div class="links">
+    <a href="project.html" class="link" id="link1">Project</a>
+    <a href="Portfolio.html" class="link" id="link2">Portfolio</a>
+    
+</div>
 
 </body>
 
-
-<script>
-    //Define charts:
-    var myChart1 = "GU_1975-2022.json";
-    var myChart2 = "BorrowingCosts.json";
-    
-    var myChart5 = "chart5_G7_ExchangeRateBar.json";
-    var myChart6 = "chart6_G7ExchangeRateLine.json";
-    var myChart7 = "Week4_F1Rankings.json";
-
-    var mychart8 = "chart8_civilservice.json";
-    var mychart9 = "chart9_construction.json";
-    var mychart10 = "chart10_education.json";
-    var mychart11 = "chart11_hmforces.json";
-    var mychart12 = "chart12_nhs.json";
-    var mychart13 = "chart13_ohsw.json";
-    var mychart14 = "chart14_other.json";
-    var mychart15 = "chart15_policejson";
-    var mychart16 = "chart16_publicadmin.json";
-
-    // Embed charts:
-    vegaEmbed('#Chart1', myChart1);
-    vegaEmbed('#Chart2', myChart2);
-    
-    vegaEmbed('#Chart5', myChart5);
-    vegaEmbed('#Chart6', myChart6);
-    vegaEmbed('#Chart7', myChart7);
-    vegaEmbed('#Chart8', myChart8);
-    vegaEmbed('#Chart9', myChart9);
-    vegaEmbed('#Chart10', myChart10);
-    vegaEmbed('#Chart11', myChart11);
-    vegaEmbed('#Chart12', myChart12);
-    vegaEmbed('#Chart13', myChart13);
-    vegaEmbed('#Chart14', myChart14);
-    vegaEmbed('#Chart15', myChart15);
-    vegaEmbed('#Chart16', myChart16);
-
-
-</script>
 
 </html>
