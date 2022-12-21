@@ -37,7 +37,7 @@
 
     <h3>Exchange Rate</h3>
             <p>The first chart tracks GBPUSD.</p>
-            <div class="chart" id="Chart1"></div>
+            <div class="chart" id="Chart1"> </div>
 
 <!--the second charts compares borrowing costs in the UK against the US-->
 
@@ -78,6 +78,20 @@
 
 <div class="chart" id="Chart7"> </div>
 
+<h2>Week 5</h2>
+<p>The fifth task was to use the ONS API to batch download nine different series as JSON files whose data can be used to create a series of related charts</p>
+
+<div class="grid-container" style = "display: grid;">
+    <div class="grid-item"><div class = dashchart id = "Chart8" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart9" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart10" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart11" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart12" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart13" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart14" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart15" style = "display: block;"></div></div>
+    <div class="grid-item"><div class = dashchart id = "Chart16" style = "display: block;"></div></div>
+
 
 </body>
 
@@ -91,6 +105,16 @@
     var myChart6 = "chart6_G7ExchangeRateLine.json";
     var myChart7 = "Week4_F1Rankings.json";
 
+    var mychart8 = "CivilService.json";
+    var mychart9 = "Construction.json";
+    var mychart10 = "Education.json";
+    var mychart11 = "HMForces.json";
+    var mychart12 = "NHS.json";
+    var mychart13 = "OHSW.json";
+    var mychart14 = "Other(ifc).json";
+    var mychart15 = "Police.json";
+    var mychart16 = "PublicAdmin.json";
+
     // Embed charts:
     vegaEmbed('#Chart1', myChart1);
     vegaEmbed('#Chart2', myChart2);
@@ -98,6 +122,16 @@
     vegaEmbed('#Chart5', myChart5);
     vegaEmbed('#Chart6', myChart6);
     vegaEmbed('#Chart7', myChart7);
+    vegaEmbed('#Chart8', myChart8);
+    vegaEmbed('#Chart7', myChart7);
+    vegaEmbed('#Chart9', myChart9);
+    vegaEmbed('#Chart10', myChart10);
+    vegaEmbed('#Chart11', myChart11);
+    vegaEmbed('#Chart12', myChart12);
+    vegaEmbed('#Chart13', myChart13);
+    vegaEmbed('#Chart14', myChart14);
+    vegaEmbed('#Chart15', myChart15);
+    vegaEmbed('#Chart16', myChart16);
 
 
 </script>
