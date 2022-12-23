@@ -87,6 +87,31 @@ h1, h3, p{
 
 }
   
+#linkonsapi{
+  border:px;
+  border-color:black;
+  border-style: solid;
+  border-bottom: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight:700;
+  color:black;
+  text-decoration: none;
 
+  
+}
+
+#linkonsapi{ display: block;text-align: center;}
+
+#linkonsapi:hover{
+
+  background-color: rgba(30, 197, 223, 0.148);
+
+  border:2px;
+  border-color:black;
+  border-style: solid;
+  
+}
 
 
