@@ -18,26 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
 
-    <style>
-        a:link {
-          text-decoration: underline;
-          color: #939597;
-        }
-    
-        a:visited {
-          text-decoration: underline;
-          color: #939597;
-        }
-    
-        a:hover {
-          text-decoration: none;
-          color: #939597;
-        }
-    
-        a:active {
-          text-decoration: none;
-          color: #939597;
-        }
 
 
 </head>
@@ -47,75 +27,106 @@
 <body>
     <!-- A div that contains a group of items for week 1. Can be useful for setting background colours etc.  -->
     <div class="myWeek1">
-        <h1>Data Science for Economists.</h1>
+ <h1>Data Science for Economists.</h1>
         
-        
-    </div> 
 
 
-<h2>Week 1</h2>
-        <p>the first task was to embed two charts onto my homepage</p>
+    <h2>Week 1</h2>
+    <p>the first task was to embed two charts onto my homepage</p>
 
 <!--First chart is the exchange rate between GBPUSD-->
 
-    <h3>Exchange Rate</h3>
+            <h3>Exchange Rate</h3>
             <p>The first chart tracks GBPUSD.</p>
             <div class="chart" id="Chart1"> </div>
 
 <!--the second charts compares borrowing costs in the UK against the US-->
 
-    <h3>Borrowing Costs</h3>
+            <h3>Borrowing Costs</h3>
             <p>The second chart compares borrowing costs in the UK and the US</p>
             <div class="chart" id="Chart2"> </div>
 
-<h2>Week 2</h2>
+    <h2>Week 2</h2>
     <p>the second task was to replicate a chart from the FT and improve it</p>
 
 <!--Third chart is the original plot used by the FT-->
 
-    <h3>IMF Lending Outstanding</h3>
-<!--insert div and chart here-->
+            <h3>IMF Lending Outstanding</h3>
+            <div class="chart" id="Chart3"> </div>
 
 <!--Fourth chart is updated version of IMF Lending. (as a % of global GDP)-->
 
-    <h3>IMF Lendning Updated</h3>
-<!--insert div and chart here-->
+            <h3>IMF Lendning Updated</h3>
+            <div class="chart" id="Chart3"> </div>
 
 <!--Analysis of Week 2 charts -->
-<p>insert text here...</p>
+            <p>insert text here...</p>
 
-<h2>Week 3</h2>
-<p>The third task was to add two more charts whereby, the second has imporved visual ecoding </p>
+    <h2>Week 3</h2>
+    <p>The third task was to add two more charts whereby, the second has imporved visual ecoding </p>
 
 <!--The fifth chart is the exchange rate against the US dollar of the G7 nations, excluding Japan.-->
-    <h3>Exchange Rate against the US dollar of G7 currencies (excluding Japan)</h3>
-    <div class="chart" id="Chart5"> </div>
+             <h3>Exchange Rate against the US dollar of G7 currencies (excluding Japan)</h3>
+             <div class="chart" id="Chart5"> </div>
 
 <!--The sixth chart is a line graph insetad of a stacked bar-->
-    <div class="chart" id="Chart6"> </div>
+            <div class="chart" id="Chart6"> </div>
 
-<p>why the secocnd chart encoding is better than the first</p>
+            <p>why the secocnd chart encoding is better than the first</p>
 
-<h2>Week 4</h2>
-<p>Implimenting a data scraaper of my own</p>
-
-<div class="chart" id="Chart7"> </div>
+<!--F1 Drivers standings-->            
+    <h2>Week 4</h2>
+    <p>Implimenting a data scraaper of my own</p>
+           
+             <h3>Formula 1 Drivers Standings 2022</h3>
+            <div class="chart" id="Chart7"> </div>
 
 <h2>Week 5</h2>
 <p>The fifth task was to use the ONS API to batch download nine different series as JSON files whose data can be used to create a series of related charts</p>
 
-<div class="grid-container" style = "display: grid;">
-    <div class="grid-item"><div class = dashchart id = "Chart8" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart9" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart10" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart11" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart12" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart13" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart14" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart15" style = "display: block;"></div></div>
-    <div class="grid-item"><div class = dashchart id = "Chart16" style = "display: block;"></div></div>
+            <h3>ONS API Data</h3>
 
+            <div class="grid-container" style = "display: grid;">
+            <div class="grid-item"><div class = dashchart id = "Chart8" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart9" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart10" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart11" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart12" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart13" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart14" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart15" style = "display: block;"></div></div>
+            <div class="grid-item"><div class = dashchart id = "Chart16" style = "display: block;"></div></div>
 
+<h2>Week 7</h2>
+
+            <!--Two maps, a base map and a chloropleth-->
+            <h3>Maps</h3>
+           
+            <div class="chart" id="Chart17"> </div>
+            <div class="chart" id="Chart18"> </div>
+
+<h2>Week 8</h2>
+
+            <!--festival of economics-->
+            <h3>Festival of Economics: Bubbles</h3>
+           
+            <div class="chart" id="Chart19"> </div>
+            <div class="chart" id="Chart20"> </div>
+
+<h2>Week 9</h2>
+
+            <!--Advanced Charts-->
+            <h3>SPX Candelstick chart and second advanced chart...</h3>
+            <div class="chart" id="Chart21"> </div>
+            <div class="chart" id="Chart22"> </div>
+
+<h2>Week 10-11</h2>
+
+            <!--Machines learning-->
+            <h3>Machine learning chart...</h3>
+            <div class="chart" id="Chart23"> </div>
+
+     </div> 
 </body>
 
 
@@ -123,7 +134,8 @@
     //Define charts:
     var myChart1 = "GU_1975-2022.json";
     var myChart2 = "BorrowingCosts.json";
-    
+    var myChart3 = "chart3_IMFFT.json";
+  
     var myChart5 = "chart5_G7_ExchangeRateBar.json";
     var myChart6 = "chart6_G7ExchangeRateLine.json";
     var myChart7 = "Week4_F1Rankings.json";
@@ -141,7 +153,8 @@
     // Embed charts:
     vegaEmbed('#Chart1', myChart1);
     vegaEmbed('#Chart2', myChart2);
-    
+    vegaEmbed('#Chart3', myChart3);
+   
     vegaEmbed('#Chart5', myChart5);
     vegaEmbed('#Chart6', myChart6);
     vegaEmbed('#Chart7', myChart7);
