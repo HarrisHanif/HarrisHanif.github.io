@@ -74,44 +74,66 @@ h1, h3, p{
   border-color: rgb(255,55,95);
 }
 
-.chartio{
-  align-items: center;
-  background-color: #939597;
-  width:250px;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 5px;
-  border-color: rgb(255,55,95);
-  margin-left: 50px;
-  margin-bottom: 50px;
-
-}
-  
-#linkonsapi{
-  border:px;
-  border-color:black;
-  border-style: solid;
-  border-bottom: 30px;
-  border-radius: 5px;
-  padding: 10px;
-  font-family: 'Roboto', sans-serif;
-  font-weight:700;
-  color:black;
-  text-decoration: none;
-
-  
+#Chart8{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
 }
 
-#linkonsapi{ display: block;text-align: center;}
-
-#linkonsapi:hover{
-
-  background-color: rgba(30, 197, 223, 0.148);
-
-  border:2px;
-  border-color:black;
-  border-style: solid;
-  
+#Chart9{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
 }
+
+#Chart10{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart11{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart12{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart13{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart14{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart15{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+#Chart16{
+  margin-bottom: 10px;
+  width: 10px;
+  margin-left: -120px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 150%;
+}
+
+
 
 
