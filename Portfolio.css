@@ -135,5 +135,31 @@ h1, h3, p{
 }
 
 
+#Chart19{
+  background-color: #939597;
+width: 380px;
+border-width: 2px;
+ border-style: solid;
+ border-radius: 10px;
+ border-color: rgb(255, 55, 95);
+ text-align: center;
+ display: flex; 
+ margin: 0 auto;
+ align-items:flex-end;
+ border-bottom: 30px;
+ margin-bottom: 30px;}
 
+ #Chart20{
+  background-color: #939597;
+width: 380px;
+border-width: 2px;
+ border-style: solid;
+ border-radius: 10px;
+ border-color: rgb(255, 55, 95);
+ text-align: center;
+ display: flex; 
+ margin: 0 auto;
+ align-items:flex-end;
+ border-bottom: 30px;
+ margin-bottom: 30px;}
 
