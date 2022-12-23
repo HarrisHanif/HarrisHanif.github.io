@@ -1,0 +1,38 @@
+{"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+      "text": "Total IMF Lending Outstanding",
+      "subtitle":"Credit outstanding to all members 1984-2022 (billions), Source: IMF",
+      "subtitleFontStyle":"italic",
+      "subtitleFontSize":10,
+      "anchor": "start",
+      "color": "black"},
+  
+  "data":{"url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/IMF%20Lending%20Original.csv"},
+
+ "transform": [{"calculate": "datum.Totals/1000000000", "as": "billions"}],
+  
+  "height": 300,
+  "width": 260,
+
+  "mark": {
+    "type": "bar",
+    "color": "#002FA7"},
+
+"encoding": {
+     "x": {
+       "field": "Year",
+       "type": "temporal",
+       "axis": {
+         "title": null,
+         "grid": false,
+         "ticks": false,
+         "labelAngle": 45}},
+
+      "y": {
+        "field": "billions",
+        "type": "quantitative",
+        "title": "",
+        "axis": {"grid": false}}
+}
+}
