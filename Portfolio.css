@@ -74,7 +74,18 @@ h1, h3, p{
   border-color: rgb(255,55,95);
 }
 
+.chartio{
+  align-items: center;
+  background-color: #939597;
+  width:250px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgb(255,55,95);
+  margin-left: 50px;
+  margin-bottom: 50px;
 
+}
   
 
 
