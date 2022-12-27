@@ -1,43 +1,43 @@
-Country,Population 
-Antigua and Barbuda,98728
-Argentina,45808747
-Aruba,107195
-"Bahamas, The",396914
-Barbados,287708
-Belize,404915
-Bolivia ,11832936
-Brazil,213993441
-British Virgin Islands,30423
-Cayman Islands,66498
-Chile,19212362
-Colombia,51265841
-Costa Rica,5139053
-Cuba,11317498
-Curacao,152369
-Dominica,72172
-Dominican Republic ,10953714
-Ecuador ,17888474
-El Salvador ,6518500
-Grenada,113015
-Guatemala,17109746
-Guyana,790329
-Haiti,11541683
-Honduras,10062994
-Jamaica,2973462
-Mexico,130262220
-Nicaragua,6702379
-Panama,4381583
-Paraguay,7219641
-Peru,33359416
-Puerto Rico,3263584
-Sint Maarten (Dutch Part),42846
-St. Kitts and Nevis ,53546
-St. Lucia ,184401
-St. Martin,39239
-St. Vincent and the Genadines ,111269
-Suriname ,591798
-Trinidad and Tobago,1403374
-Turks and Caicos,39226
-Uruguay,3485152
-Venezuela,28704947
-Virgin Islands,105870
+Country,Population ,,Unemployment Rate
+Antigua and Barbuda,98728,,
+Argentina,45808747,,10.9
+Aruba,107195,,
+"Bahamas, The",396914,,13.2
+Barbados,287708,,10.4
+Belize,404915,,8.2
+Bolivia ,11832936,,8.5
+Brazil,213993441,,14.4
+British Virgin Islands,30423,,
+Cayman Islands,66498,,
+Chile,19212362,,9.1
+Colombia,51265841,,14.3
+Costa Rica,5139053,,18
+Cuba,11317498,,2.8
+Curacao,152369,,
+Dominica,72172,,
+Dominican Republic ,10953714,,8.5
+Ecuador ,17888474,,6.4
+El Salvador ,6518500,,5.9
+Grenada,113015,,
+Guatemala,17109746,,3.6
+Guyana,790329,,16.4
+Haiti,11541683,,15.7
+Honduras,10062994,,8.5
+Jamaica,2973462,,9.2
+Mexico,130262220,,4.4
+Nicaragua,6702379,,6
+Panama,4381583,,12.1
+Paraguay,7219641,,7.2
+Peru,33359416,,4.8
+Puerto Rico,3263584,,8.3
+Sint Maarten (Dutch Part),42846,,
+St. Kitts and Nevis ,53546,,
+St. Lucia ,184401,,16.9
+St. Martin,39239,,
+St. Vincent and the Genadines ,111269,,21.6
+Suriname ,591798,,10.1
+Trinidad and Tobago,1403374,,4.8
+Turks and Caicos,39226,,
+Uruguay,3485152,,10.4
+Venezuela,28704947,,6.4
+Virgin Islands,105870,,13.3
