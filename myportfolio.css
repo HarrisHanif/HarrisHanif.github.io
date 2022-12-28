@@ -56,12 +56,12 @@ h1, h3, p{
     
 }
 
-#Chart3{
+#Chart1{
   margin-right: 100px;
   margin-left: 110px;
 }
 
-#Chart4{
+#Chart2{
     margin-top: 15px;
     margin-bottom: 30px;
     margin-right: 100px;
@@ -70,7 +70,7 @@ h1, h3, p{
 }
 
 
-#Chart6{
+#Chart4{
   margin-right: 120px;
   margin-left: 60px;
   margin-top: 15px;
@@ -80,19 +80,19 @@ h1, h3, p{
 
 
 
-#Chart7{
+#Chart5{
     margin-right: 80px;
     margin-left: -45px;
     margin-top: 15px;
   }
 
-#Chart8{
+#Chart6{
     margin-right: 80px;
     margin-left: -40px;
     
   }
 
- #Chart9{
+ #Chart7{
     margin-left: 20px;
     
   }
@@ -109,7 +109,7 @@ h1, h3, p{
 
 
 
-  #Chart10, #Chart11, #Chart12, #Chart13, #Chart14, #Chart15, #Chart16, #Chart17, #Chart18 {
+  #Chart8, #Chart9, #Chart10, #Chart11, #Chart12, #Chart13, #Chart14, #Chart15, #Chart16 {
     background-color: white;
     border-width: 5px;
     border-radius: 10px;
@@ -155,36 +155,36 @@ hr.solid {
 }
 
 
-#Chart19{
+#Chart17{
   margin-left: 5px;
   margin-top: 15px;
 }
 
-#Chart20{
+#Chart18{
   margin-left: 2px;
   margin-top: 15px;
 }
 
-#Chart21{
+#Chart19{
   margin-left: 60px;
   margin-bottom: 15px;
  
 }
-#Chart22{
+#Chart20{
   margin-left: 18px;
  
 }
-#Chart23{
+#Chart21{
   margin-left: 55px;
  
 }
 
-#Chart24{
+#Chart22{
   margin-left: 15px;
  
 }
 
-#Chart25{
+#Chart23{
   margin-left: -100px;
   
 
