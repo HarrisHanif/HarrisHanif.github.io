@@ -1,0 +1,24 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "South America",
+    "subtitle": "A base map of South America with added tooltip to identify countries",
+    "anchor": "start",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10
+  },
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/SouthAmerica.Geojson",
+    "format": {"property": "features"}
+  },
+  "projection": {"type": "mercator"},
+  "mark": {
+    "type": "geoshape",
+    "stroke": "black",
+    "fill": "lightgray",
+    "strokeWidth": 0.5
+  },
+  "encoding": {"tooltip": {"field": "properties.name", "type": "nominal"}}
+}
