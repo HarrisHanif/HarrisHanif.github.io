@@ -1,0 +1,191 @@
+/*CSS file for portfolio*/
+
+/* Import a font */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Set the background color for my page: */
+
+
+body{
+    background-color:#faeae6;
+    background-size: cover;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
+/* Choose the appearance of the tags, h1, h3 and p: */
+h1, h3, p{
+    color:rgb(0, 0, 0);
+    font-family: 'Open', sans-serif;
+    text-align: center;
+}
+    
+.portfolio{
+    margin: auto;
+    max-width: 600px;
+    background-color: #faeae6;
+
+}
+
+
+/* Set the apperance of the class, chart */
+.chart{
+    background-color: white;
+    width: auto;
+    border-width: 5px;
+    border-radius: 10px;
+    border-style:solid;
+    border-color: #7a6a6a;
+    margin-left: 120px;
+    margin-right: 120px;
+    overflow: auto;
+    
+}
+
+#Chart3{
+  margin-right: 100px;
+  margin-left: 110px;
+}
+
+#Chart4{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-right: 100px;
+    margin-left: 110px;
+ 
+}
+
+
+#Chart6{
+  margin-right: 120px;
+  margin-left: 60px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  
+}
+
+
+
+#Chart7{
+    margin-right: 80px;
+    margin-left: -45px;
+    margin-top: 15px;
+  }
+
+#Chart8{
+    margin-right: 80px;
+    margin-left: -40px;
+    
+  }
+
+ #Chart9{
+    margin-left: 20px;
+    
+  }
+
+
+ .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-row-gap: 20px;
+    justify-content: center;
+    
+  
+     }
+
+
+
+  #Chart10, #Chart11, #Chart12, #Chart13, #Chart14, #Chart15, #Chart16, #Chart17, #Chart18 {
+    background-color: white;
+    border-width: 5px;
+    border-radius: 10px;
+    border-style:solid;
+    border-color: #7a6a6a;
+    margin-left: 70px;
+    margin-right: 70px;
+    overflow: auto;
+    
+  }
+
+  /* Solid border */
+hr.solid {
+  border-top: 5px solid #7a6a6a;
+  max-width: 450px;
+}
+
+
+  /*NAVIGATION BAR*/
+.navtop {
+  position:relative;
+  background-color: #7a6a6a;
+  margin-right: 0;
+  overflow: hidden;
+  font-family: 'Open', sans-serif;
+  border-bottom:1px solid white;
+  opacity: 100%;
+  color:white;
+}
+
+.navtop a {
+  float: right;
+  color: rgb(226, 226, 226);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navtop a:hover {
+  background-color: rgb(226, 226, 226);
+  color: black;
+}
+
+
+#Chart19{
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+#Chart20{
+  margin-left: 2px;
+  margin-top: 15px;
+}
+
+#Chart21{
+  margin-left: 60px;
+  margin-bottom: 15px;
+ 
+}
+#Chart22{
+  margin-left: 18px;
+ 
+}
+#Chart23{
+  margin-left: 55px;
+ 
+}
+
+#Chart24{
+  margin-left: 15px;
+ 
+}
+
+#Chart25{
+  margin-left: -100px;
+  
+
+}
