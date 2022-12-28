@@ -1,22 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-</head>
+    <link rel="stylesheet" href="project.css">
 
-<body>
-<h1>Here is myy project</h1>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+  </head>
 
-<p>here is my text</p>
+  <body>
+    <h1>Data Science for Economists</h1>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum voluptates recusandae voluptatibus iure, consequuntur veniam voluptas debitis itaque cum officia aliquam enim amet nemo sequi natus quis. Nisi, cum vero.</p>
+    <div id="week-1">
+      <h2>Week 1</h2>
+      <p>the first task was to embed two charts onto my homepage</p>
+  
+      <h3>Exchange Rate</h3>
+      <p>The first chart tracks GBPUSD.</p>
+      <div class="chart" id="chart-1"></div>
+  
+      <h3>Borrowing Costs</h3>
+      <p>The second chart compares borrowing costs in the UK and the US</p>
+      <div class="chart" id="chart-2"></div>
+    </div>
 
-</body>
+    <div id="week-2">
+      <h2>Week 2</h2>
+      <p>the second task was to replicate a chart from the FT and improve it</p>
 
+      <h3>IMF Lending Outstanding</h3>
+      <div class="chart" id="chart-3"> </div>
 
+      <h3>IMF Lending Updated</h3>
+      <div class="chart" id="chart-4"> </div>
+    </div>
+
+    <div id="week-3">
+      <h2>Week 3</h2>
+      <p>The third task was to add two more charts whereby, the second has improved visual encoding </p>
+
+      <h3>Exchange Rate against the US dollar of G7 currencies (excluding Japan)</h3>
+      <div class="chart" id="chart-5"> </div>
+
+      <h3>[ Description ]</h3>
+      <div class="chart" id="chart-6"> </div>
+    </div>
+
+    <div id="week-4">
+      <h2>Week 4</h2>
+      <p>Implimenting a data scraper of my own</p>
+           
+      <h3>Formula 1 Drivers Standings 2022</h3>
+      <div class="chart" id="chart-7"> </div>
+    </div>
+
+    <div id="week-5">
+      <h2>Week 5</h2>
+      <p>The fifth task was to use the ONS API to batch download nine different series as JSON files whose data can be used to create a series of related charts</p>
+
+      <table>
+        <tr>
+          <td>
+            <div class="chart" id="chart-8"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-9"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-10"></div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="chart" id="chart-11"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-12"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-13"></div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="chart" id="chart-14"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-15"></div>
+          </td>
+          <td>
+            <div class="chart" id="chart-16"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="week-7">
+      <h2>Week 7</h2>
+
+        <h3>Maps</h3>
+        
+        <div class= "chart" id="chart-17"> </div>
+        <div class= "chart" id="chart-18"> </div>
+    </div>
+
+    <div id="week-8">
+      <h2>Week 8</h2>
+
+        <h3>Festival of Economics: Bubbles</h3>
+        
+        <div class= "chart" id="chart-19"> </div>
+        <div class= "chart" id="chart-20"> </div>
+    </div>
+
+    <div id="week-9">
+      <h2>Week 9</h2>
+
+        <h3>SPX Candelstick chart and second advanced chart...</h3>
+        
+        <div class= "chart" id="chart-21"> </div>
+        <div class= "chart" id="chart-22"> </div>
+    </div>
+
+    <div id="week-10-11">
+      <h2>Weeks 10:11</h2>
+
+        <h3>Machine learning chart...</h3>
+        
+        <div class= "chart" id="chart-23"> </div>
+        <div class= "chart" id="chart-24"> </div>
+    </div>
+  </body>
+
+  <script>
+    var myChart1 = "GU_1975-2022.json";
+    var myChart2 = "BorrowingCosts.json";
+    var myChart3 = "chart3_IMFFT.json";
+    var myChart4 = "chart4_IMF2.json";
+    var myChart5 = "chart5_G7_ExchangeRateBar.json";
+    var myChart6 = "chart6_G7ExchangeRateLine.json";
+    var myChart7 = "Week4_F1Rankings.json";
+    var mychart8 = "chart8_civilservice.json";
+    var mychart9 = "chart9_construction.json";
+    var mychart10 = "chart10_education.json";
+    var mychart11 = "chart11_hmforces.json";
+    var mychart12 = "chart12_nhs.json";
+    var mychart13 = "chart13_ohsw.json";
+    var mychart14 = "chart14_other.json";
+    var mychart15 = "chart15_police.json";
+    var mychart16 = "chart16_publicadmin.json";
+    var mychart17 = "SABaseMap.json";
+    var mychart18 = "SAUnemploymentRate.json";
+    var mychart19 = "FTTUSD.json";
+    var mychart20 = "BTCUSD.json";
+    var mychart21 = "SPXAdvancedChart.json";
+    var mychart22 = "SP500VIXAdvancedChart.json";
+
+    // Embed charts:
+    vegaEmbed('#chart-1', myChart1);
+    vegaEmbed('#chart-2', myChart2);
+    vegaEmbed('#chart-3', myChart3);
+    vegaEmbed('#chart-4', myChart4);
+    vegaEmbed('#chart-5', myChart5);
+    vegaEmbed('#chart-6', myChart6);
+    vegaEmbed('#chart-7', myChart7);
+    vegaEmbed('#chart-8', myChart8);
+    vegaEmbed('#chart-9', myChart9);
+    vegaEmbed('#chart-10', myChart10);
+    vegaEmbed('#chart-11', myChart11);
+    vegaEmbed('#chart-12', myChart12);
+    vegaEmbed('#chart-13', myChart13);
+    vegaEmbed('#chart-14', myChart14);
+    vegaEmbed('#chart-15', myChart15);
+    vegaEmbed('#chart-16', myChart16);
+    vegaEmbed('#chart-19', myChart19);
+    vegaEmbed('#chart-20', myChart20);
+  </script>
 </html>
