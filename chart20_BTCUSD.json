@@ -1,0 +1,39 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+    "data": {
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/CBBTCUSD.csv",
+       "format": {
+           "type":"csv",
+           "property": "Date"}},
+
+
+    "title": {
+        "text": "BTC in USD",
+        "subtitle": "Source: FRED",
+        "subtitleFontStyle":"italic",
+        "subtitleFontSize":10,
+        "anchor": "start",
+        "color": "black"},
+
+    "width":300,
+    "height":300,
+
+    "mark":{
+        "type": "line",
+        "color":"#002FA7",
+        "strokeWidth":2,
+        "opacity":1},
+ 
+
+    "encoding": {
+      "x": {
+          "field": "DATE",
+          "type": "temporal",
+          "title":"Year"},
+      "y": {
+          "field": "CBBTCUSD",
+          "type": "quantitative",
+          "title":"USD"}
+    }
+} 
