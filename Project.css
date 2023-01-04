@@ -41,4 +41,10 @@ h1, h3, p{
     border-color: rgb(255,55,95);
   }
 
+  .project{
+    margin: auto;
+    max-width: 600px;
+    background-color: #939597;
+  
+  }
   
