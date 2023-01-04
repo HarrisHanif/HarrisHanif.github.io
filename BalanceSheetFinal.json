@@ -2,7 +2,8 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
     "data": {
-       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/Total%20Assets%20(2).csv"
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/Total%20Assets%20(2).csv",
+       "format": {"type": "csv"}
  },   
 
 
