@@ -39,6 +39,7 @@ h1, h3, p{
     border-style: solid;
     border-radius: 10px;
     border-color: rgb(255,45,85);
+    flex:1;
   }
 
 
@@ -49,12 +50,8 @@ h1, h3, p{
   
   }
 
-  .float-parent-element { 
-    width: 50%; 
-} 
-
-.float-child-element { 
-    float: left; 
-    width: 50%; 
-} 
+.chart-container{
+  display:flex;
+  flex-direction:row;
+}
   
