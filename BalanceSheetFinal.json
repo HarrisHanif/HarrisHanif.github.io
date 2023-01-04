@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
     "data": {
-       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/Total%20Assets%20(2).csv",
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/Total%20Assets%20(2).csv"
  },   
 
 
@@ -36,7 +36,7 @@
           "field": "DATE",
           "type": "temporal",
           "title":"Month",
-           "axis": {"domain": true, "grid": false, "ticks": false,}},
+           "axis": {"domain": true, "grid": false, "ticks": false}},
 
       "y": {
           "field": "trillions",
