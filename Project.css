@@ -41,6 +41,18 @@ h1, h3, p{
     border-color: rgb(255,45,85);
   }
 
+  .chart-1{
+    float: left;
+    display: block;
+    width: 50%;
+  }
+
+  .chart-2{
+    float: right;
+    display: block;
+    width: 50%;
+  }
+
   .project{
     margin: auto;
     max-width: 600px;
