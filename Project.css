@@ -41,17 +41,6 @@ h1, h3, p{
     border-color: rgb(255,45,85);
   }
 
-  .chart-1{
-    float: left;
-    display: block;
-    width: 50%;
-  }
-
-  .chart-2{
-    float: right;
-    display: block;
-    width: 50%;
-  }
 
   .project{
     margin: auto;
@@ -59,4 +48,13 @@ h1, h3, p{
     background-color: rgb(209,209,214);
   
   }
+
+  .float-parent-element { 
+    width: 50%; 
+} 
+
+.float-child-element { 
+    float: left; 
+    width: 50%; 
+} 
   
