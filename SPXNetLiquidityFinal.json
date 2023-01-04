@@ -23,7 +23,7 @@
           "field": "Date",
           "title":"Date",
           "axis": {
-            "grid": false,
+            "grid": false
           },
           "type": "temporal"}
           },

@@ -33,7 +33,7 @@
         ],
         "encoding": {
           "x": {"field": "NetLiquidity", "type": "quantitative"},
-          "y": {"field": "SPX(lag)", "type": "quantitative", }
+          "y": {"field": "SPX(lag)", "type": "quantitative"}
         }
       },
       {

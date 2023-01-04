@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
     "data": {
-       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/ProjectDataSheet2.csv",
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/ProjectDataSheet2.csv"
  },   
 
 
@@ -35,7 +35,7 @@
           "field": "Date",
           "type": "temporal",
           "title":"Month",
-           "axis": {"domain": true, "grid": false, "ticks": false,}},
+           "axis": {"domain": true, "grid": false, "ticks": false}},
 
       "y": {
           "field": "CPI",
