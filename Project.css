@@ -14,7 +14,7 @@ body {
     "Helvetica Neue", 
     sans-serif;
   padding: 0;
-  background-color: #939597;
+  background-color: rgb(209,209,214);
   margin: 0;
 }
 
@@ -33,18 +33,18 @@ h1, h3, p{
     display:block;
     margin-left: 25%;
     margin-right: 25%;
-    background-color: #939597;
+    background-color: rgb(209,209,214);
     width: auto;
     border-width: 5px;
     border-style: solid;
     border-radius: 10px;
-    border-color: rgb(255,55,95);
+    border-color: rgb(255,45,85);
   }
 
   .project{
     margin: auto;
     max-width: 600px;
-    background-color: #939597;
+    background-color: rgb(209,209,214);
   
   }
   
