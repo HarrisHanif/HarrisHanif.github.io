@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Title for the page -->
+    <title>Data Science Project</title>
+
+    <!-- Link to my style sheet -->
+    <link rel="stylesheet" href="project.css">
+
+    <!--The next three lines allow the Vega embed-->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+
+
+
+</head>
+
+
+
+<body>
+
+    <div class="myproject">
+     <h1>Data Science Project:</h1>
+
+     <h2>Aim:</h2>
+
+     <p>aims of the project</p>
+
+     <!--Total Assets and TGA-->
+
+     <div class="chart" id="chart-1"></div>
+     <div class="chart" id="chart-2"></div>
+
+     <p>FED Balance sheet and Treasury General Account</p>
+
+
+     <!--Inflation Chart-->
+
+     <div class="chart" id="chart-3"></div>
+
+     <p>Inflation getting out of control</p>
+
+     <!--Treasury Bills and Award Rate Charts-->
+
+     <div class="chart" id="chart-4"></div>
+     <div class="chart" id="chart-5"></div>
+
+     <p>FED cuts supply of low duration paper</p>
+
+     <!--Reverse Repo Chart-->
+
+     <div class="chart" id="chart-6"></div>
+
+     <p>Over $2 Trillion unable to circulate in the economy</p>
+
+     <p>Explain net liquidity as the amount of $ that is actually in circulation in the economy</p>
+
+     <!--Net Liquidity Correlation-->
+
+     <div class="chart" id="chart-7"></div>
+
+
+     <h3>Data Used Including Notes on Automation and Replication:</h3>
+
+     <p>text</p>
+
+     <h3>Challenges in the Analysis:</h3>
+
+     <p>text</p>
+
+     <h2>Conclusions:</h2>
+
+     <p>text</p>
+
+
+
+
+
+
+
+
+
+    </div> 
+</body>
+
+<script>
+    
+    //Define charts:
+    var myChart1 = "data_ONS-G7D6.json";
+    var myChart2 = "";
+
+    // Embed charts:
+    vegaEmbed('#Chart1', myChart1);
+    vegaEmbed('#Chart2', myChart2);
+
+</script>
+
+</html>
