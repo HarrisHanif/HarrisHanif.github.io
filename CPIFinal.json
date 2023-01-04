@@ -1,0 +1,46 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+    "data": {
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/ProjectDataSheet2.csv",
+ },   
+
+
+    "title": {
+        "text": "Median Consumer Price Index: US",
+        "subtitle": "Quarterly Percentage Change, seasonally adjusted",
+        "subtitleFontStyle":"italic",
+        "subtitleFontSize":10,
+        "anchor": "start",
+        "color": "black"},
+
+    "width":300,
+    "height":300,
+    
+    "background": "rgb(209,209,214)",
+
+
+
+    "mark":{
+        "type": "line",
+        "color":"rgb(0,122,255)",
+        "strokeWidth":3,
+        "opacity":1},
+ 
+ 
+
+
+    "encoding": {
+      "x": {
+          "field": "Date",
+          "type": "temporal",
+          "title":"Month",
+           "axis": {"domain": true, "grid": false, "ticks": false,}},
+
+      "y": {
+          "field": "CPI",
+          "type": "quantitative",
+          "title":"Percentage Change",
+           "axis": {"domain": true, "grid": false, "ticks": false}}
+    }
+}

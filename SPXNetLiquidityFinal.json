@@ -1,0 +1,86 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  
+  
+   "title": {
+    "text": "SPX and Net Liquidity",
+    "subtitle":"Relationship between Net Liquidity and SPX (2 week offset), 2020-present",
+    "subtitleFontStyle":"italic",
+    "subtitleFontSize":10,
+    "anchor": "start"},
+  
+    "width":300,
+    "height":300,
+  "background":"rgb(209,209,214)",
+  
+    "data": {
+      "name":"myData",
+      "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/ProjectDataSheet.csv"},
+  
+  
+    "encoding": {     
+        "x": {
+          "field": "Date",
+          "title":"Date",
+          "axis": {
+            "grid": false,
+          },
+          "type": "temporal"}
+          },
+            
+     "layer":[
+  
+        {"mark": {
+            "type": "line",
+            "point": false,
+            "strokeWidth":2,
+            "width":1
+          },
+  
+        "encoding": {
+            "y": {
+            "field": "NetLiquidity",
+            "type": "quantitative",
+            "title": "Net Liquidity",
+            "axis": {
+              "grid": false,            
+              "labelColor":"rgb(0,122,255)",
+              "format":",.2s"}
+              },
+              
+            "color": {
+              "datum": "Net Liquidity (Billions)",
+              "scale": {"range": ["rgb(0,122,255)", "rgb(255,45,85)"]},
+              "legend":{
+                "orient": "bottom-right"}}}
+        },
+  
+       {"mark": {
+            "type": "line",
+            "point": false,
+            "strokeWidth":2
+          },
+  
+        "encoding": {
+            "y": {
+            "field": "SPX(lag)",
+            "type": "quantitative",
+            "title": "Price of SPX",
+            "axis": {
+              "grid": false,
+              "labelColor":"rgb(255,45,85)",
+              "format":"$,.2s"}
+              },
+              
+            "color": {
+              "datum": "SPX",
+              "scale": {"range": ["rgb(0,122,255)", "rgb(255,45,85)"]},
+              "legend":{
+                "orient": "bottom-right"}}
+          
+          } 
+      }
+  ],
+  
+      "resolve": {"scale": {"y": "independent"}} 
+  }

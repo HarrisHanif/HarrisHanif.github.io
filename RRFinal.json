@@ -1,0 +1,50 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+    "data": {
+       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/RRPONTSYD.csv",
+ },   
+
+"background":"rgb(209,209,214)",
+
+
+    "title": {
+        "text": "Overnight Reverse Repurchase Agreements:",
+        "subtitle": "Treasury Securities Sold by the FED in the Temporary Open Market Operations ",
+        "subtitleFontStyle":"italic",
+        "subtitleFontSize":10,
+        "anchor": "start",
+        "color": "black"},
+
+    "width":300,
+    "height":300,
+    
+
+ "transform": [{"calculate": "datum.RRPONTSYD/1000", "as": "trillions"}],
+
+    "mark":{
+        "type": "line",
+        "color":"rgb(0,122,255)",
+        "strokeWidth":2,
+        "opacity":1},
+ 
+ 
+
+
+    "encoding": {
+      "x": {
+          "field": "DATE",
+          "type": "temporal",
+          "title":"Date",
+           "axis": {"domain": true, "grid": false, "ticks": false,
+           "format": "%m-%Y",
+           }},
+
+      "y": {
+          "field": "trillions",
+          "type": "quantitative",
+          "title":"Trillions of USD$",
+           "axis": {"domain": true, "grid": false, "ticks": false}}
+    }
+}
+

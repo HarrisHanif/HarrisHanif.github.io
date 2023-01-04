@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+   
+   
+    "data": {"url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/ProjectDataSheet.csv"},
+   
+   "background": "rgb(209,209,214)",
+  
+   
+    "layer": [
+      {
+        "mark": {"type": "point", "filled": true,  "color": "rgb(255,45,85"},
+        "encoding": {
+          "x": {"field": "NetLiquidity",
+          "title": "Net Liquidity",
+          "axis": {
+           "grid": false},
+          "type": "quantitative"
+          },
+         
+         
+          "y": {"field": "SPX(lag)",
+           "title": "SPX",
+                   "axis": {
+           "grid": false},
+           "type": "quantitative"}
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "rgb(0,122,255"},
+        "transform": [
+          {"regression": "SPX(lag)", "on": "NetLiquidity"}
+        ],
+        "encoding": {
+          "x": {"field": "NetLiquidity", "type": "quantitative"},
+          "y": {"field": "SPX(lag)", "type": "quantitative", }
+        }
+      },
+      {
+        "transform": [
+          {
+            "regression": "SPX(lag)",
+            "on": "NetLiquidity",
+            "params": true
+          },
+          {"calculate": "'R²: '+format(datum.rSquared, '.2f')", "as": "R2"}
+        ],
+        "mark": {
+          "type": "text",
+          "color": "rgb(0,0,0)",
+          "x": "width",
+          "align": "right",
+          "y": -5
+        },
+        "encoding": {"text": {"type": "nominal", "field": "R2"}}
+      }
+    ]
+  }
