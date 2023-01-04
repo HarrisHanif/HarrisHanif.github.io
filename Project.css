@@ -55,5 +55,6 @@ h1, h3, p{
   flex-direction:row;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
   
