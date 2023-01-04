@@ -40,6 +40,7 @@ h1, h2, h3, p{
     border-radius: 10px;
     border-color: rgb(255,45,85);
     flex:1;
+    margin: auto;
   }
 
 
