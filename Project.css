@@ -23,7 +23,7 @@ canvas {
   height: 100%;
 }
 
-h1, h3, p{
+h1, h2, h3, p{
     color:rgb(17, 17, 17);
     font-family: 'Roboto', sans-serif;
     text-align: center;
