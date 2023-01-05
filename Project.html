@@ -33,6 +33,7 @@
       
     </div>
 
+    
     <header> 
         <div class="title-bar">
              <h1 style="color: rgb(255, 45, 85)"><b>Data Science</b></h1>
@@ -49,7 +50,13 @@
 
      <h2>Aim:</h2>
 
-     <p>aims of the project</p>
+     <p>As the world enters another year, the gloomy economic outlook from 2022 remains. 
+        “Unprecedented” events such as the COVID-19 pandemic and the war in Ukraine have 
+        been blamed by governments and media for the hardships the population now endure. 
+        This narrative has helped justify the worst stock market performance since 2008. 
+        In this project I hope to demonstrate that this terrible market is not as a result 
+        of international struggles but instead a product of the Federal Reserve’s inability
+         to turn of the “money printers”, as is typically the case during the fall of most empires.</p>
 
      <!--Total Assets and TGA-->
 
@@ -65,14 +72,21 @@
 
      
 
-     <p>FED Balance sheet and Treasury General Account</p>
+     <p>The Federal Reserve’s balance sheet and the Fed Funds Rate used to be key drivers of the US stock market 
+        however, in 2020 during the height of the COVID-19 pandemic, the financial rules were rewritten. 
+        In July 2020, the Federal Reserve doubled the size of its balance sheet ‘printing’ almost $4.5 trillion. 
+        Quantitative easing has been a common policy in the western world since the Global Financial Crisis 
+        but this time the US Treasury also decided to provision itself with $1.8 trillion, almost 5x as much as
+         it had ever given itself before! This outflow of money from the Treasury General Account became the sole 
+         driver of markets and liquidity became the only thing that mattered.</p>
 
 
      <!--Inflation Chart-->
 
      <div class="chart" id="chart-3"></div>
 
-     <p>Inflation getting out of control</p>
+     <p>However, this enormous release of liquidity drove inflation and the cost of living higher over a two-year 
+        period as shown by the Median CPI. </p>
 
      <!--Treasury Bills and Award Rate Charts-->
 
@@ -83,15 +97,26 @@
 
     </div>
 
-     <p>FED cuts supply of low duration paper</p>
+     <p>In order to combat this rapidly rising inflation, the Treasury issued fewer short-dated Bills such as the 
+        4-Week Treasury Bills to create a shortage of low duration financial paper which is essential to financial 
+        institutions in order to stimulate the economy with liquidity. In addition, The FED increase the award rate
+         on the Reverse Repo which is the next best alternative to short-dated Treasury Bills. Both of these measured 
+         reached original levels in June 2022 when QT started.</p>
 
      <!--Reverse Repo Chart-->
 
      <div class="chart" id="chart-6"></div>
 
-     <p>Over $2 Trillion unable to circulate in the economy</p>
+     <p>As a result, $2 trillion was consumed by the Reverse Repo and thus unable to circulate in the economy. 
+        This is approximately 6x more than had ever been done before. </p>
 
-     <p>Explain net liquidity as the amount of $ that is actually in circulation in the economy</p>
+     <p>In the past, the size of the FED’s balance sheet roughly equalled Net Liquidity, which is the amount of 
+        money that is available to circulate in the economy. The Treasury General Account and the Reverse Repo 
+        did not typically influence Net Liquidity however, in 2020 the changes in the size of the Treasury General 
+        Account and Reverse Repo were significantly greater than any changes to the FED’s Balance Sheet.
+         Therefore, Net Liquidity should now be calculated as:</p>   
+
+     <p>Net Liquidity = FED Balance Sheet - TGA - Reverse Repo </p>
 
      <!--Net Liquidity Correlation-->
 
@@ -99,19 +124,32 @@
      
      <div class="chart" id="chart-8"></div>
 
+     <p>Ever since July 2020 this Net Liquidity calculation has been the sole driver of the SP500 when offset by 2 weeks,
+         which we can assume is the time taken for this liquidity to spread into the economy and impact asset prices.
+        I performed a linear regression and achieved an R2 value of 0.98 indicating a very strong statistical significance. 
+        Therefore, by calculating changes in Net Liquidity, one can predict the direction of the SP500 over the next 2-week period. </p>
 
-     <h3>Data Used Including Notes on Automation and Replication:</h3>
 
-     <p>text</p>
+     <h3>Data Used Including Notes on Automation and Replication and Challenges:</h3>
 
-     <h3>Challenges in the Analysis:</h3>
+     <p>All of the data used in this project was taken from the FRED website. In order to gather the data to perform the 
+        Net Liquidity calculation and subsequent linear regression I used the FRED API to import the relevant series into 
+        a Python notebook in Google Collab, where I could merge them into a single data frame.  
+        I converted this data frame into a CSV file which I downloaded into in order to conduct my analysis in Excel and 
+        applying the data to a Vega chart. This same data was used to create a visual representation of the relationship 
+        between the SP500 and Net Liquidity as well as the first two charts. APIs could not be used for these charts given
+         the required data cleaning and manipulation and I decided not to use an API for the first two charts as the relevant
+         information is in the past and I was worried about reaching the API Request limit. Live data would not add to the narrative.</p>
 
-     <p>text</p>
+     <p>The python notebook can be found here.</p>
 
-     <h2>Conclusions:</h2>
+     <p>For the Reverse Repo, Reverse Repo Award Rate, 4-Week Treasury Bill and Median CPI charts I used the FRED API to incorporate live data into the website. </p>
 
-     <p>text</p>
+     <p>The data for these charts can be found here: Reverse Repo, Reverse Repo Award Rate, 4-Week T-Bills, Median CPI</p>
 
+     <P>I encountered an issue whereby some of the data from the FRED website would not be correctly visualised in Vega, 
+        but the problem would fix itself when putting the same data into a different workbook. It was difficult to show the
+         correlation between Net Liquidity and the SP500 and the incorporation of the 2-week lag was vital to reaching a sound conclusion.</P>
 
 
     </div> 
