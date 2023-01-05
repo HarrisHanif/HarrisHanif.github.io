@@ -90,3 +90,27 @@ h1, h2, h3, p{
   margin: auto;
 }
 
+.navtop {
+  position:relative;
+  background-color: rgb(58, 58, 60);
+  margin-right: 0;
+  overflow: hidden;
+  font-family: 'Open', sans-serif;
+  border-bottom:1px solid white;
+  opacity: 100%;
+  color:white;
+}
+
+.navtop a {
+  float: right;
+  color: rgb(226, 226, 226);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navtop a:hover {
+  background-color: rgb(226, 226, 226);
+  color: black;
+}
