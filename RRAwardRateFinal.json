@@ -1,13 +1,18 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-    "data": {
-       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/RRPONTSYAWARD.csv"
- },   
+  "data": {
+      "name": "myData",
+      "url": "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.stlouisfed.org%2Ffred%2Fseries%2Fobservations%3Fseries_id%3DRRPONTSYAWARD%26api_key%3D10bba6f39eb4a6972530da56ddc82a0e%26file_type%3Djson",
+    
+    
+      "format": {"type": "json", "property": "observations"}
+     
+    },
 
 
     "title": {
-        "text": "Overnight Reverse Repurchase Agreements Award Rate:",
+        "text": "Overnight Repurchase Agreements Award Rate",
         "subtitle": "Treasury Securities Sold by the FED in the Temporary Open Market Operations",
         "subtitleFontStyle":"italic",
         "subtitleFontSize":10,
@@ -24,21 +29,33 @@
     "mark":{
         "type": "line",
         "color":"rgb(0,122,255)",
-        "strokeWidth":3,
-        "opacity":1},
+        "strokeWidth":2,
+        "opacity":1
+        },
+      
+    "transform": [
+    {"calculate": "year(datum.date)", "as": "year"},
+    {"filter": "datum.year>minYear"}
+  ],
+   "params": [
+    {
+      "name": "minYear",
+      "value": 2019}
+      ],
+ 
  
  
 
 
     "encoding": {
       "x": {
-          "field": "DATE",
+          "field": "date",
           "type": "temporal",
-          "title":"Month",
-           "axis": {"domain": true, "grid": false, "ticks": false}},
+          "title":"Date",
+           "axis": {"domain": true, "grid": false, "ticks": false, "format": "%m-%Y"}},
 
       "y": {
-          "field": "RRPONTSYAWARD",
+          "field": "value",
           "type": "quantitative",
           "title":"Percent",
            "axis": {"domain": true, "grid": false, "ticks": false}}

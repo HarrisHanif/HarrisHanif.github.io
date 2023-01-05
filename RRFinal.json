@@ -1,16 +1,19 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-    "data": {
-       "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/RRPONTSYD.csv"
- },   
-
-"background":"rgb(209,209,214)",
+  "data": {
+      "name": "myData",
+      "url": "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.stlouisfed.org%2Ffred%2Fseries%2Fobservations%3Fseries_id%3DRRPONTSYD%26api_key%3D10bba6f39eb4a6972530da56ddc82a0e%26file_type%3Djson",
+    
+    
+      "format": {"type": "json", "property": "observations"}
+     
+    },
 
 
     "title": {
         "text": "Overnight Reverse Repurchase Agreements:",
-        "subtitle": "Treasury Securities Sold by the FED in the Temporary Open Market Operations ",
+        "subtitle": "Treasury Securities Sold by the FED in the Temporary Open Market Operations",
         "subtitleFontStyle":"italic",
         "subtitleFontSize":10,
         "anchor": "start",
@@ -19,32 +22,43 @@
     "width":500,
     "height":300,
     
+    "background": "rgb(209,209,214)",
 
- "transform": [{"calculate": "datum.RRPONTSYD/1000", "as": "trillions"}],
+
 
     "mark":{
         "type": "line",
         "color":"rgb(0,122,255)",
         "strokeWidth":2,
-        "opacity":1},
+        "opacity":1
+        },
+      
+    "transform": [
+    {"calculate": "year(datum.date)", "as": "year"},
+    {"calculate": "datum.value/1000", "as": "trillions"},
+    {"filter": "datum.year>minYear"}
+  ],
+   "params": [
+    {
+      "name": "minYear",
+      "value": 2019}
+      ],
+ 
  
  
 
 
     "encoding": {
       "x": {
-          "field": "DATE",
+          "field": "date",
           "type": "temporal",
           "title":"Date",
-           "axis": {"domain": true, "grid": false, "ticks": false,
-           "format": "%m-%Y"
-           }},
+           "axis": {"domain": true, "grid": false, "ticks": false, "format": "%m-%Y"}},
 
       "y": {
           "field": "trillions",
           "type": "quantitative",
-          "title":"Trillions of USD$",
+          "title":"Percent",
            "axis": {"domain": true, "grid": false, "ticks": false}}
     }
 }
-
