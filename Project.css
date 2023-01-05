@@ -21,10 +21,9 @@ body {
 .title-bar{
   position: absolute;
   top:0%;
-  margin-left: 10%;
-  margin-right: 0%;
+ margin: auto;
   padding:2px 65px;
-  width:85%;
+  width:40%;
   margin: 0;
   background-color: rgb(209,209,214); 
   height: auto;
@@ -33,14 +32,14 @@ body {
   }
 
 .title-bar h1{ 
-  font-size: 65px;
+  font-size: 50px;
   font-weight: bold;
   text-transform: uppercase;
   margin: 50px;
   }
 
 .title-bar p{ 
-    font-size: 10px;
+    font-size: 25px;
     font-weight: bold;
     margin: 50px;
     color: rgb(255,45,85);
