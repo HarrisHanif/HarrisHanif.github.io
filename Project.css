@@ -89,4 +89,81 @@ h1, h2, h3, p{
   align-items: center;
   margin: auto;
 }
-  
+
+.navigation {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 100%;
+  background: rgb(58,58,60) no-repeat center fixed;
+  transition: 0.5s;
+  overflow: hidden;
+  color: rgb(58,58,60);
+  font-family: 'Lato', sans-serif;
+}
+
+.navigation:hover,
+.navigation.active {
+  width: 250px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+}
+
+.navigation ul li:hover {
+  background: rgb(28,28,30);
+  transition: 0.5s ease;
+  color: rgb(28,28,30)
+}
+
+.navigation ul li a {
+  position: relative;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: rgb(44,44,46;
+}
+
+.navigation ul li a:hover {
+  color: white;
+}
+
+.navigation li a.active {
+    background-color: rgb(209,209,214);
+    color: white;
+    font-weight: 900;
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.navigation ul li a .icon .fa {
+  font-size: 24px;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
