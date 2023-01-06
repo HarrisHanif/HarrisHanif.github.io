@@ -7,8 +7,11 @@
     "subtitleFontStyle": "italic",
     "subtitleFontSize": 10
   },
-  "width": 400,
-  "height": 400,
+
+  "background":"rgb(209,209,214)",
+
+  "width": 300,
+  "height": 300,
   "data": {
     "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/SouthAmerica.Geojson",
     "format": {"property": "features"}
@@ -17,7 +20,7 @@
   "mark": {
     "type": "geoshape",
     "stroke": "black",
-    "fill": "lightgray",
+    "fill": "rgb(255,25,85)",
     "strokeWidth": 0.5
   },
   "encoding": {"tooltip": {"field": "properties.name", "type": "nominal"}}

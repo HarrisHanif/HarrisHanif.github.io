@@ -1,41 +1,49 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {"url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/BTCSPX.csv"},
-    "layer": [
-      {
-        "mark": {"type": "point", "filled": true},
-        "encoding": {
-          "x": {"field": "SP500", "type": "quantitative"},
-          "y": {"field": "VIXCLS", "type": "quantitative"}
-        }
-      },
-      {
-        "mark": {"type": "line", "color": "firebrick"},
-        "transform": [
-          {"regression": "VIXCLS", "on": "SP500"}
-        ],
-        "encoding": {
-          "x": {"field": "SP500", "type": "quantitative"},
-          "y": {"field": "VIXCLS", "type": "quantitative"}
-        }
-      },
-      {
-        "transform": [
-          {
-            "regression": "VIXCLS",
-            "on": "SP500",
-            "params": true
-          },
-          {"calculate": "'R²: '+format(datum.rSquared, '.2f')", "as": "R2"}
-        ],
-        "mark": {
-          "type": "text",
-          "color": "firebrick",
-          "x": "width",
-          "align": "right",
-          "y": -5
-        },
-        "encoding": {"text": {"type": "nominal", "field": "R2"}}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/BTCSPX.csv"},
+ 
+ "background":"rgb(209,209,214)",
+
+ "width": 600,
+  "height": 300,
+
+  "layer": [
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "x": {"field": "SP500","axis": {
+         "grid": false}, "type": "quantitative"},
+        "y": {"field": "VIXCLS", "axis": {
+         "grid": false},"type": "quantitative"}
       }
-    ]
-  }
+    },
+    {
+      "mark": {"type": "line", "color": "rgb(255,45,85"},
+      "transform": [
+        {"regression": "VIXCLS", "on": "SP500"}
+      ],
+      "encoding": {
+        "x": {"field": "SP500", "type": "quantitative"},
+        "y": {"field": "VIXCLS", "type": "quantitative"}
+      }
+    },
+    {
+      "transform": [
+        {
+          "regression": "VIXCLS",
+          "on": "SP500",
+          "params": true
+        },
+        {"calculate": "'R²: '+format(datum.rSquared, '.2f')", "as": "R2"}
+      ],
+      "mark": {
+        "type": "text",
+        "color": "black",
+        "x": "width",
+        "align": "right",
+        "y": -5
+      },
+      "encoding": {"text": {"type": "nominal", "field": "R2"}}
+    }
+  ]
+}

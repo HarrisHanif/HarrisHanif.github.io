@@ -8,6 +8,9 @@
            "property": "Date"}},
 
 
+"background":"rgb(209,209,214)",
+
+
     "title": {
         "text": "FTT in USD",
         "subtitle": "Price of FTX's token in dollars ",
@@ -21,7 +24,7 @@
 
     "mark":{
         "type": "line",
-        "color":"#002FA7",
+        "color":"rgb(0,122,255)",
         "strokeWidth":2,
         "opacity":1},
  
@@ -30,10 +33,12 @@
       "x": {
           "field": "Date",
           "type": "temporal",
-          "title":"Month"},
+          "title":"Month",
+          "axis": {"grid": false}},
       "y": {
           "field": "Close",
           "type": "quantitative",
-          "title":"USD"}
+          "title":"USD",
+          "axis": {"grid": false}}
     }
 }

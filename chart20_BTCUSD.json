@@ -7,6 +7,8 @@
            "type":"csv",
            "property": "Date"}},
 
+"background":"rgb(209,209,214)",
+
 
     "title": {
         "text": "BTC in USD",
@@ -21,7 +23,7 @@
 
     "mark":{
         "type": "line",
-        "color":"#002FA7",
+        "color":"rgb(0,122,255)",
         "strokeWidth":2,
         "opacity":1},
  
@@ -30,10 +32,12 @@
       "x": {
           "field": "DATE",
           "type": "temporal",
-          "title":"Year"},
+          "title":"Year",
+           "axis": {"grid": false}},
       "y": {
           "field": "CBBTCUSD",
           "type": "quantitative",
-          "title":"USD"}
+          "title":"USD",
+           "axis": {"grid": false}}
     }
 } 

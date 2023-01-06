@@ -1,34 +1,36 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {
-      "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/data_ONS-G7EX.json",
-      "format": {"type": "json", "property": "years"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/data_ONS-G7EX.json",
+    "format": {"type": "json", "property": "years"}
+  },
+
+ "background":"rgb(209,209,214)", 
+  
+  "title": {
+    "text": "Police (Including Civilians)",
+    "subtitle": "in thousands: Source: ONS",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  
+  "width": 200,
+  "height": 200,
+  "mark": {"type": "line", "color": "rgb(0,122,255"},
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "axis": {"grid": false},
+      "title": "year"
     },
-    
-    "title": {
-      "text": "Public Sector Employment, Police (Including Civilians)",
-      "subtitle": "in thousands: Source: ONS",
-      "subtitleFontStyle": "italic",
-      "subtitleFontSize": 10,
-      "anchor": "start",
-      "color": "black"
-    },
-    
-    "width": 200,
-    "height": 200,
-    "mark": {"type": "line", "color": "rgb(0,47,167"},
-    "encoding": {
-      "x": {
-        "field": "date",
-        "type": "temporal",
-        "axis": {"grid": false},
-        "title": ""
-      },
-      "y": {
-        "field": "value",
-        "type": "quantitative",
-        "axis": {"grid": false},
-        "title": "Employment"
-      }
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "axis": {"grid": false},
+      "title": "Employment"
     }
   }
+}
