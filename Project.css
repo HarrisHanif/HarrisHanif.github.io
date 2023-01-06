@@ -95,6 +95,18 @@ h1, h2, h3, p{
   margin: auto;
 }
 
+@media (max-width: 600px) {
+  .chart-container {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .chart-container {
+    flex: 0 0 100%;
+  }
+}
+
 .navtop {
   position:relative;
   background-color: rgb(58, 58, 60);
