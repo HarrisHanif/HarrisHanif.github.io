@@ -7,17 +7,19 @@
       "subtitleFontSize":10,
       "anchor": "start",
       "color": "black"},
+
+  "background":"rgb(209,209,214)",
   
   "data":{"url": "https://raw.githubusercontent.com/HarrisHanif/HarrisHanif.github.io/main/IMF%20Lending%20Original.csv"},
 
  "transform": [{"calculate": "datum.Totals/1000000000", "as": "billions"}],
   
   "height": 300,
-  "width": 260,
+  "width": 300,
 
   "mark": {
     "type": "bar",
-    "color": "#002FA7"},
+    "color": "rgb(0,122,255)"},
 
 "encoding": {
      "x": {

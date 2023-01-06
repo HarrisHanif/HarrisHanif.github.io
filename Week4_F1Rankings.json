@@ -1,37 +1,40 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Bar chart with text labels. Set domain to make the frame cover the labels.",
-    "title": {
-      "text": "2022 Formula World CHampionship Ranking",
-      "subtitle": "F1 Driver Standings, Source: Formula1 ",
-      "subtitleFontStyle": "italic",
-      "subtitleFontSize": 10,
-      "anchor": "start",
-      "color": "black"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bar chart with text labels. Set domain to make the frame cover the labels.",
+  "title": {
+    "text": "2022 Formula World CHampionship Ranking",
+    "subtitle": "F1 Driver Standings, Source: Formula1 ",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+
+"background":"rgb(209,209,214)",
+
+  "width": 300,
+  "height": 300,
+  "data": {
+    "values": [{"Pos": 1, "Driver": "Max  Verstappen  VER", "Car": "Red Bull Racing RBPT", "PTS": 454}, {"Pos": 2, "Driver": "Charles  Leclerc  LEC", "Car": "Ferrari", "PTS": 308}, {"Pos": 3, "Driver": "Sergio  Perez  PER", "Car": "Red Bull Racing RBPT", "PTS": 305}, {"Pos": 4, "Driver": "George  Russell  RUS", "Car": "Mercedes", "PTS": 275}, {"Pos": 5, "Driver": "Carlos  Sainz  SAI", "Car": "Ferrari", "PTS": 246}, {"Pos": 6, "Driver": "Lewis  Hamilton  HAM", "Car": "Mercedes", "PTS": 240}, {"Pos": 7, "Driver": "Lando  Norris  NOR", "Car": "McLaren Mercedes", "PTS": 122}, {"Pos": 8, "Driver": "Esteban  Ocon  OCO", "Car": "Alpine Renault", "PTS": 92}, {"Pos": 9, "Driver": "Fernando  Alonso  ALO", "Car": "Alpine Renault", "PTS": 81}, {"Pos": 10, "Driver": "Valtteri  Bottas  BOT", "Car": "Alfa Romeo Ferrari", "PTS": 49}, {"Pos": 11, "Driver": "Daniel  Ricciardo  RIC", "Car": "McLaren Mercedes", "PTS": 37}, {"Pos": 12, "Driver": "Sebastian  Vettel  VET", "Car": "Aston Martin Aramco Mercedes", "PTS": 37}, {"Pos": 13, "Driver": "Kevin  Magnussen  MAG", "Car": "Haas Ferrari", "PTS": 25}, {"Pos": 14, "Driver": "Pierre  Gasly  GAS", "Car": "AlphaTauri RBPT", "PTS": 23}, {"Pos": 15, "Driver": "Lance  Stroll  STR", "Car": "Aston Martin Aramco Mercedes", "PTS": 18}, {"Pos": 16, "Driver": "Mick  Schumacher  MSC", "Car": "Haas Ferrari", "PTS": 12}, {"Pos": 17, "Driver": "Yuki  Tsunoda  TSU", "Car": "AlphaTauri RBPT", "PTS": 12}, {"Pos": 18, "Driver": "Zhou  Guanyu  ZHO", "Car": "Alfa Romeo Ferrari", "PTS": 6}, {"Pos": 19, "Driver": "Alexander  Albon  ALB", "Car": "Williams Mercedes", "PTS": 4}, {"Pos": 20, "Driver": "Nicholas  Latifi  LAT", "Car": "Williams Mercedes", "PTS": 2}, {"Pos": 21, "Driver": "Nyck  De Vries  DEV", "Car": "Williams Mercedes", "PTS": 2}, {"Pos": 22, "Driver": "Nico  Hulkenberg  HUL", "Car": "Aston Martin Aramco Mercedes", "PTS": 0}]
+  },
+  "encoding": {
+    "y": {
+      "field": "Driver",
+      "type": "nominal",
+      "sort": "quantitative",
+      "title": "Driver"
     },
-    "width": 400,
-    "height": 300,
-    "data": {
-      "values": [{"Pos": 1, "Driver": "Max  Verstappen  VER", "Car": "Red Bull Racing RBPT", "PTS": 454}, {"Pos": 2, "Driver": "Charles  Leclerc  LEC", "Car": "Ferrari", "PTS": 308}, {"Pos": 3, "Driver": "Sergio  Perez  PER", "Car": "Red Bull Racing RBPT", "PTS": 305}, {"Pos": 4, "Driver": "George  Russell  RUS", "Car": "Mercedes", "PTS": 275}, {"Pos": 5, "Driver": "Carlos  Sainz  SAI", "Car": "Ferrari", "PTS": 246}, {"Pos": 6, "Driver": "Lewis  Hamilton  HAM", "Car": "Mercedes", "PTS": 240}, {"Pos": 7, "Driver": "Lando  Norris  NOR", "Car": "McLaren Mercedes", "PTS": 122}, {"Pos": 8, "Driver": "Esteban  Ocon  OCO", "Car": "Alpine Renault", "PTS": 92}, {"Pos": 9, "Driver": "Fernando  Alonso  ALO", "Car": "Alpine Renault", "PTS": 81}, {"Pos": 10, "Driver": "Valtteri  Bottas  BOT", "Car": "Alfa Romeo Ferrari", "PTS": 49}, {"Pos": 11, "Driver": "Daniel  Ricciardo  RIC", "Car": "McLaren Mercedes", "PTS": 37}, {"Pos": 12, "Driver": "Sebastian  Vettel  VET", "Car": "Aston Martin Aramco Mercedes", "PTS": 37}, {"Pos": 13, "Driver": "Kevin  Magnussen  MAG", "Car": "Haas Ferrari", "PTS": 25}, {"Pos": 14, "Driver": "Pierre  Gasly  GAS", "Car": "AlphaTauri RBPT", "PTS": 23}, {"Pos": 15, "Driver": "Lance  Stroll  STR", "Car": "Aston Martin Aramco Mercedes", "PTS": 18}, {"Pos": 16, "Driver": "Mick  Schumacher  MSC", "Car": "Haas Ferrari", "PTS": 12}, {"Pos": 17, "Driver": "Yuki  Tsunoda  TSU", "Car": "AlphaTauri RBPT", "PTS": 12}, {"Pos": 18, "Driver": "Zhou  Guanyu  ZHO", "Car": "Alfa Romeo Ferrari", "PTS": 6}, {"Pos": 19, "Driver": "Alexander  Albon  ALB", "Car": "Williams Mercedes", "PTS": 4}, {"Pos": 20, "Driver": "Nicholas  Latifi  LAT", "Car": "Williams Mercedes", "PTS": 2}, {"Pos": 21, "Driver": "Nyck  De Vries  DEV", "Car": "Williams Mercedes", "PTS": 2}, {"Pos": 22, "Driver": "Nico  Hulkenberg  HUL", "Car": "Aston Martin Aramco Mercedes", "PTS": 0}]
-    },
-    "encoding": {
-      "y": {
-        "field": "Driver",
-        "type": "nominal",
-        "sort": "quantitative",
-        "title": ""
-      },
-      "x": {
-        "field": "PTS",
-        "type": "quantitative",
-        "scale": {"domain": [0, 500]}
-      }
-    },
-    "layer": [
-      {"mark": {"type": "bar", "color": "rgb(0,47,167"}},
-      {
-        "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
-        "encoding": {"text": {"field": "PTS", "type": "quantitative"}}
-      }
-    ]
-  }
+    "x": {
+      "field": "PTS",
+      "type": "quantitative",
+      "scale": {"domain": [0, 500]}
+    }
+  },
+  "layer": [
+    {"mark": {"type": "bar", "color": "rgb(0,122,255"}},
+    {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+      "encoding": {"text": {"field": "PTS", "type": "quantitative"}}
+    }
+  ]
+}
