@@ -69,4 +69,10 @@ h1, h3, p{
     color: black;
   }
 
+  .portfolio{
+    margin: auto;
+    max-width: 600px;
+    background-color: rgb(209,209,214);
+  
+  }
   
