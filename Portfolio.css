@@ -42,7 +42,10 @@ h1, h2, h3, p{
     border-color: rgb(255,45,85);
     overflow: auto;
     justify-content: center;
+    margin: auto;
   }
+
+  
 
   .chart:hover {
     
