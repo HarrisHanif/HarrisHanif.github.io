@@ -54,7 +54,7 @@ h1, h2, h3, p{
     
   }
 
-  table {
+  table,td,th {
     margin: auto;
     width: 60%;
     text-align: center;
