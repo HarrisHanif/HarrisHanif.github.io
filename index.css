@@ -24,7 +24,10 @@ body{
     background-color: rgb(50,173,230);
 }
 
-
+@viewport {
+    width: device-width ;
+    zoom: 1.0 ;
+  }
 
 
 

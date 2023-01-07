@@ -104,15 +104,8 @@ h1, h2, h3, p{
     margin: auto;
   }
   
-  @media (max-width: 600px) {
-    .chart-container {
-      flex: 0 0 50%;
-    }
-  }
-  
-  @media (max-width: 300px) {
-    .chart-container {
-      flex: 0 0 100%;
-    }
+  @viewport {
+    width: device-width ;
+    zoom: 1.0 ;
   }
   
