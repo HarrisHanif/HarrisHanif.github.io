@@ -103,6 +103,15 @@ h1, h2, h3, p{
     align-items: center;
     margin: auto;
   }
+
+  @media only screen and (max-width: 600px) {
+    table,
+    td,
+    th {
+      display: block;
+      width: 100%;
+    }
+  }
   
   @viewport {
     width: device-width ;
