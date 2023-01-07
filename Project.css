@@ -100,7 +100,12 @@ h1, h2, h3, p{
   margin: auto;
 }
 
-
+@media only screen and (max-width: 600px) {
+  .chart-container {
+    display: block;
+    width: 100%;
+  }
+}
 
 .navtop {
   position:relative;
