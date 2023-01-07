@@ -103,13 +103,13 @@ h1, h2, h3, p{
 @media only screen and (max-width: 600px) {
   .chart-container {
     display: block;
-    width: 100%;
+    width: 80%;
     justify-content: center;
   }
 }
 @media screen and (max-width: 600px) {
   .chart {
-    width: 100%;
+    width: 80%;
     justify-content: center;
   }
 }
