@@ -56,7 +56,7 @@ h1, h2, h3, p{
 
   .table {
     margin: auto;
-    width: auto;
+    width: 60%;
     text-align: center;
     justify-content: center;
     justify-items: center;
