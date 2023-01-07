@@ -100,9 +100,15 @@ h1, h2, h3, p{
   margin: auto;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .flex-container {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .chart {
+    width: 90%;  /* Set chart width to 90% of its parent container */
   }
 }
 
