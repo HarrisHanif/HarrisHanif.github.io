@@ -118,7 +118,7 @@
 
      <p>Ever since July 2020 this Net Liquidity calculation has been the sole driver of the SP500 when offset by 2 weeks,
          which we can assume is the time taken for this liquidity to spread into the economy and impact asset prices.
-        I performed a linear regression and achieved an R2 value of 0.98 indicating a very strong statistical significance. 
+        I performed a linear regression and achieved an R-Squared value of 0.98 indicating a very strong statistical significance. 
         Therefore, by calculating changes in Net Liquidity, one can predict the direction of the SP500 over the next 2-week period. </p>
 
 
@@ -131,7 +131,7 @@
         applying the data to a Vega chart. This same data was used to create a visual representation of the relationship 
         between the SP500 and Net Liquidity as well as the first two charts. APIs could not be used for these charts given
          the required data cleaning and manipulation and I decided not to use an API for the first two charts as the relevant
-         information is in the past and I was worried about reaching the API Request limit. Live data would not add to the narrative.</p>
+         information is in the past and I was worried about reaching the API request limit. Live data would not add to the narrative.</p>
 
          <div class="wrap">
             <p class="rubric-launch">To access the code behind the charts, click 
@@ -143,9 +143,10 @@
      <p>For the Reverse Repo, Reverse Repo Award Rate, 4-Week Treasury Bill and Median CPI charts I used the FRED API to incorporate live data into the website. </p>
 
 
-     <P>I encountered an issue whereby some of the data from the FRED website would not be correctly visualised in Vega, 
-        but the problem would fix itself when putting the same data into a different workbook. It was difficult to show the
-         correlation between Net Liquidity and the SP500 and the incorporation of the 2-week lag was vital to reaching a sound conclusion.</P>
+     <P> It was difficult to show the correlation between Net Liquidity and the S&P500. The incorporation of the 2-week lag was vital to raise the value of R-squared 
+        which is a logical assumption given the significant volume of money and the current fragility of the stock market. Unfortunately I was unable to produce a desired
+    stacked area chart of Net Liquidity, TGA and Reverse Repo as the components of the Fed's balance sheet with an overlaying line of SPX which would have finalised my argument. This 
+was due to a limitation of Vega. Nevertheless, I hope the value of my R-Squared cements my argument.</P>
 
 
     </div> 
