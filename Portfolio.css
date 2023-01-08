@@ -56,7 +56,6 @@ h1, h2, h3, p{
   }
 
   table,td,th {
-    display: flex;
     margin: auto;
     width: 60%;
     text-align: center;
