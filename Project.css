@@ -76,6 +76,8 @@ h1, h2, h3, p{
     border-color: rgb(255,45,85);
     flex:1;
     margin: auto;
+    justify-content: center;
+    justify-items: center;
   }
 
   .chart:hover {
