@@ -1,48 +1,48 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "name": "myData",
+    "url": "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.stlouisfed.org%2Ffred%2Fseries%2Fobservations%3Fseries_id%3DMEDCPIM158SFRBCLE%26api_key%3D10bba6f39eb4a6972530da56ddc82a0e%26file_type%3Djson",
+    "format": {"type": "json", "property": "observations"}
+  },
+  "title": {
+    "text": "Median Consumer Price Index: US",
+    "subtitle": "Quarterly Percentage Change, seasonally adjusted",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "width": 300,
+  "height": 300,
+  "background": "rgb(209,209,214)",
+  "mark": {
+    "type": "line",
+    "color": "rgb(0,122,255)",
+    "strokeWidth": 1.5,
+    "opacity": 1
+  },
+
+ "transform": [
+    {"calculate": "year(datum.date)", "as": "year"},
     
-    
-    "data": {
-      "name": "myData",
-      "url": "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.stlouisfed.org%2Ffred%2Fseries%2Fobservations%3Fseries_id%3DMEDCPIM158SFRBCLE%26api_key%3D10bba6f39eb4a6972530da56ddc82a0e%26file_type%3Djson",
-    
-    
-      "format": {"type": "json", "property": "observations"}
-     
+    {"filter": "datum.year>minYear"}
+  ],
+  "params": [{"name": "minYear", "value": 1999}],
+
+
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Year",
+      "axis": {"domain": true, "grid": false, "ticks": false}
     },
-   
-    "title": {
-      "text": "Median Consumer Price Index: US",
-      "subtitle": "Quarterly Percentage Change, seasonally adjusted",
-      "subtitleFontStyle": "italic",
-      "subtitleFontSize": 10,
-      "anchor": "start",
-      "color": "black"
-    },
-    "width": 500,
-    "height": 300,
-    "background": "rgb(209,209,214)",
-    "mark": {
-      "type": "line",
-      "color": "rgb(0,122,255)",
-      "strokeWidth": 1,
-      "opacity": 1
-  
-      
-    },
-    "encoding": {
-      "x": {
-        "field": "date",
-        "type": "temporal",
-        "title": "Year",
-        "axis": {"domain": true, "grid": false, "ticks": false}
-        
-      },
-      "y": {
-        "field": "value",
-        "type": "quantitative",
-        "title": "Percentage Change at Annual Rate",
-        "axis": {"domain": true, "grid": false, "ticks": false}
-      }
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Percentage Change at Annual Rate",
+      "axis": {"domain": true, "grid": false, "ticks": false}
     }
   }
+}

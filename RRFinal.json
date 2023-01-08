@@ -19,7 +19,7 @@
         "anchor": "start",
         "color": "black"},
 
-    "width":500,
+    "width":300,
     "height":300,
     
     "background": "rgb(209,209,214)",
