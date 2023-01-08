@@ -19,9 +19,7 @@ body {
   flex-direction: column;
   display: flex;
   align-items: center;
-  justify-content: start;
-  height: 100%;
-  width: 100%;
+  justify-content: center;
 }
 
 canvas {
@@ -40,7 +38,7 @@ h1, h2, h3, p{
     margin-left: 25%;
     margin-right: 25%;
     background-color: rgb(209,209,214);
-    width: 80vw;
+    width: auto;
     border-width: 2px;
     border-style: solid;
     border-radius: 10px;
