@@ -20,6 +20,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: start;
+  height: 100%;
+  width: 100%;
 }
 
 canvas {
@@ -48,7 +50,6 @@ h1, h2, h3, p{
     margin: auto;
   }
 
-  
 
   .chart:hover {
     
