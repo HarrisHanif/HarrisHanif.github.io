@@ -111,7 +111,7 @@ h1, h2, h3, p{
 }
 @media screen and (max-width: 600px) {
   .chart {
-    width: 80%;
+    width: auto;
     justify-content: center;
   }
 }
