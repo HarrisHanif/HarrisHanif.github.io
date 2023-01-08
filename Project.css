@@ -69,7 +69,7 @@ h1, h2, h3, p{
     margin-left: 25%;
     margin-right: 25%;
     background-color: rgb(209,209,214);
-    width: 80%!important;
+    width: auto;
     border-width: 2px;
     border-style: solid;
     border-radius: 10px;
