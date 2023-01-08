@@ -77,7 +77,6 @@ h1, h2, h3, p{
     flex:1;
     margin: auto;
     justify-content: center;
-    justify-items: center;
   }
 
   .chart:hover {
