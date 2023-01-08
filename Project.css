@@ -89,6 +89,7 @@ h1, h2, h3, p{
     margin: auto;
     max-width: 600px;
     background-color: rgb(209,209,214);
+    text-align: center;
   
   }
 
