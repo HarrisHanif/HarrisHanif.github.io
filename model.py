@@ -19,6 +19,8 @@ import random
 from statistics import mean, stdev 
 from neat.genome import DefaultGenome as Genome
 import visualize 
+from neat.checkpoint import Checkpointer
+
 
 plt.switch_backend('TkAgg')
 
@@ -177,7 +179,9 @@ class GoldTradingStrategy(bt.Strategy):
 
 
 # Define the fitness 
-def eval_genomes(genomes, config):
+def eval_genomes(genomes, config, checkpointer, p):
+
+
     data = pd.read_csv('data3_train.csv')
     scaler = MinMaxScaler()
     data_scaled = scaler.fit_transform(data.iloc[:, 1:])
@@ -246,6 +250,10 @@ def eval_genomes(genomes, config):
     # Check for genomes with None fitness or no trades
         if genome.fitness is None or results[0].analyzers.trades.get_analysis()['total']['total'] == 0:
             genome.fitness = -100
+
+    checkpointer.save_checkpoint(config, p.population, p.species, p.generation)
+
+
 
 
     
@@ -346,7 +354,7 @@ def create_and_train_neat_model():
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
 
-
+    checkpointer = Checkpointer(1)
     p = neat.Population(config)
 
     # Load the initial state, if available
@@ -374,7 +382,7 @@ def create_and_train_neat_model():
     
 
     # Run NEAT
-    winner = p.run(eval_genomes, n=num_generations)
+    winner = p.run(lambda genomes, _: eval_genomes(genomes, config, checkpointer, p), n=num_generations)
 
 
 
@@ -382,7 +390,7 @@ def create_and_train_neat_model():
     with open('winner.pkl', 'wb') as f:
         pickle.dump(winner, f)
 
-    return winner, stats, p.checkpointer, p.population, p.species_set, p.generation
+    return winner, stats, checkpointer, p.population, p.species, p.generation
 
 
 
@@ -506,7 +514,9 @@ def plot_fitness_scores(fitness_scores):
 
 
 def main(config, num_generations):
+    
     winner, stats, checkpointer, population, species_set, generation = create_and_train_neat_model()
+    
     fitness_scores = extract_fitness_scores(stats, config, num_generations)
     plot_fitness_scores(fitness_scores)
 
