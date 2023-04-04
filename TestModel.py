@@ -235,23 +235,53 @@ def evaluate(net, X_val=X_val, y_val=y_val):
     return 1 / mse
 
 
-class KerasModel(Model):
-    def __init__(self, input_shape, output_shape):
-        super().__init__()
+class KerasModel:
+    def __init__(self, genome, config):
+        # Set the input shape
+        input_shape = (len(train_data_norm[0]),)
+
+        # Create the input layer
         self.input_layer = Input(shape=input_shape)
-        self.lstm_layer = LSTM(32)(self.input_layer)
-        self.output_layer = Dense(output_shape)(self.lstm_layer)
+
+        # Create a dictionary of hidden layers
+        hidden_layers = {}
+
+        # Add the first hidden layer
+        for node_key in genome.nodes.keys():
+            if node_key == 0:
+                continue
+
+            node = genome.nodes[node_key]
+
+            # If the node is not enabled, skip it
+            if not node.enabled:
+                continue
+
+            # Add the layer to the dictionary of hidden layers
+            hidden_layers[node_key] = Dense(getattr(node, 'activation'), input_shape=input_shape)
+
+        # Add the hidden layers to the model in the correct order
+        for node_key, layer in sorted(hidden_layers.items()):
+            self.input_layer = layer(self.input_layer)
+
+        # Add the output layer
+        self.output_layer = Dense(1, activation='linear')(self.input_layer)
+
+        # Create the Keras model
         self.model = Model(inputs=self.input_layer, outputs=self.output_layer)
-        self.model.compile(loss='mse', optimizer='adam')
 
-    def predict(self, X):
-        return self.model.predict(X)
+        # Compile the model
+        self.model.compile(optimizer='adam', loss='mse')
 
-    def get_weights(self):
-        return self.model.get_weights()
 
-    def set_weights(self, weights):
-        self.model.set_weights(weights)
+
+    def train(self, train_data, val_data):
+        self.model.fit(train_data[:, :-1], train_data[:, -1], validation_data=(val_data[:, :-1], val_data[:, -1]),
+                       epochs=self.config.num_epochs, batch_size=self.config.batch_size, verbose=0)
+
+    def evaluate(self, test_data):
+        mse = self.model.evaluate(test_data[:, :-1], test_data[:, -1], verbose=0)
+        return mse
 
 
 
@@ -264,12 +294,11 @@ def eval_genomes(genomes, config, checkpointer, p):
     test_data = pd.read_csv('testing_data.csv').drop('Date', axis=1)
     val_data = pd.read_csv('validation_data.csv').drop('Date', axis=1)
 
-    # Initialize the scaler
-    scaler = MinMaxScaler()
-
     # Normalize the data
-    train_data_norm = scaler.fit_transform(train_data)
-    test_data_norm = scaler.transform(test_data)  # Transform the test data with the fitted scaler
+    scaler = MinMaxScaler()
+    scaler.fit(train_data)
+    train_data_norm = scaler.transform(train_data)
+    test_data_norm = scaler.transform(test_data)
     val_data_norm = scaler.transform(val_data)
 
     for genome_id, genome in genomes:
@@ -290,6 +319,7 @@ def eval_genomes(genomes, config, checkpointer, p):
 
     # Save the checkpoint
     checkpointer.save_checkpoint(config, p.population, p.species, p.generation)
+
 
 
 
