@@ -4,7 +4,6 @@ import backtrader as bt
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from datetime import datetime
-from sklearn.model_selection import RandomizedSearchCV
 import pickle
 import tensorflow as tf
 import neat.reporting
@@ -20,15 +19,15 @@ from statistics import mean, stdev
 from neat.genome import DefaultGenome as Genome
 import visualize 
 from neat.checkpoint import Checkpointer
+from keras.models import Sequential
+from keras.layers import LSTM, Dense
 
-import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
 
 # Load the data
-train_data = pd.read_csv('training_data.csv')
-test_data = pd.read_csv('testing_data.csv')
-val_data = pd.read_csv('validation_data.csv')
+train_data = pd.read_csv('training_data.csv').drop('Date', axis=1)
+test_data = pd.read_csv('testing_data.csv').drop('Date', axis=1)
+val_data = pd.read_csv('validation_data.csv').drop('Date', axis=1)
+
 
 # Normalize the data
 scaler = MinMaxScaler()
@@ -67,7 +66,20 @@ X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 4))
 X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 4))
 X_val = X_val.reshape((X_val.shape[0], X_val.shape[1], 4))
 
+# Define the model architecture
+model = Sequential()
+model.add(LSTM(32, input_shape=(timesteps, 4)))
+model.add(Dense(1))
 
+# Compile the model
+model.compile(loss='mse', optimizer='adam')
+
+# Train the model
+history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=50, batch_size=32)
+
+# Evaluate the model on the test data
+mse = model.evaluate(X_test, y_test)
+print(f'Test MSE: {mse}')
 
 
 
@@ -229,8 +241,10 @@ class GoldTradingStrategy(bt.Strategy):
 # Define the evaluation function
 def evaluate(net, X_val=X_val, y_val=y_val):
     y_pred = net.predict(X_val)
+    print('Predictions:', y_pred)
     mse = np.mean((y_pred - y_val)**2)
     return 1 / mse
+
 
 # Define the fitness 
 def eval_genomes(genomes, config, checkpointer, p):
