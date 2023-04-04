@@ -21,6 +21,56 @@ from neat.genome import DefaultGenome as Genome
 import visualize 
 from neat.checkpoint import Checkpointer
 
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+import numpy as np
+
+# Load the data
+train_data = pd.read_csv('training_data.csv')
+test_data = pd.read_csv('testing_data.csv')
+val_data = pd.read_csv('validation_data.csv')
+
+# Normalize the data
+scaler = MinMaxScaler()
+train_data_norm = scaler.fit_transform(train_data)
+test_data_norm = scaler.transform(test_data)
+val_data_norm = scaler.transform(val_data)
+
+# Reshape the data
+timesteps = 10
+X_train = []
+y_train = []
+for i in range(timesteps, len(train_data_norm)):
+    X_train.append(train_data_norm[i-timesteps:i])
+    y_train.append(train_data_norm[i][3])
+X_train = np.array(X_train)
+y_train = np.array(y_train)
+
+X_test = []
+y_test = []
+for i in range(timesteps, len(test_data_norm)):
+    X_test.append(test_data_norm[i-timesteps:i])
+    y_test.append(test_data_norm[i][3])
+X_test = np.array(X_test)
+y_test = np.array(y_test)
+
+X_val = []
+y_val = []
+for i in range(timesteps, len(val_data_norm)):
+    X_val.append(val_data_norm[i-timesteps:i])
+    y_val.append(val_data_norm[i][3])
+X_val = np.array(X_val)
+y_val = np.array(y_val)
+
+# Reshape the input data
+X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 4))
+X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 4))
+X_val = X_val.reshape((X_val.shape[0], X_val.shape[1], 4))
+
+
+
+
+
 
 plt.switch_backend('TkAgg')
 
