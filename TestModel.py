@@ -21,7 +21,7 @@ from neat.genome import DefaultGenome as Genome
 import visualize 
 from neat.checkpoint import Checkpointer
 from keras.models import Sequential, Model
-from keras.layers import Conv1D, MaxPooling1D, LSTM, Dense, Dropout, Input 
+from keras.layers import Conv1D, MaxPooling1D, LSTM, Dense, Dropout, Input, Activation
 from keras.optimizers import Adam
 import gym
 
@@ -236,6 +236,7 @@ def evaluate(net, X_val=X_val, y_val=y_val):
 
 
 class KerasModel:
+    
     def __init__(self, genome, config):
         # Set the input shape
         input_shape = (len(train_data_norm[0]),)
@@ -254,11 +255,15 @@ class KerasModel:
             node = genome.nodes[node_key]
 
             # If the node is not enabled, skip it
-            if not node.enabled:
+            if not getattr(node, 'enabled', True):
                 continue
 
             # Add the layer to the dictionary of hidden layers
-            hidden_layers[node_key] = Dense(getattr(node, 'activation'), input_shape=input_shape)
+            hidden_layers[node_key] = Dense(units=node.num_outputs, activation=Activation(node.activation).__name__, input_shape=input_shape)
+
+
+
+
 
         # Add the hidden layers to the model in the correct order
         for node_key, layer in sorted(hidden_layers.items()):
@@ -273,8 +278,6 @@ class KerasModel:
         # Compile the model
         self.model.compile(optimizer='adam', loss='mse')
 
-
-
     def train(self, train_data, val_data):
         self.model.fit(train_data[:, :-1], train_data[:, -1], validation_data=(val_data[:, :-1], val_data[:, -1]),
                        epochs=self.config.num_epochs, batch_size=self.config.batch_size, verbose=0)
@@ -282,6 +285,9 @@ class KerasModel:
     def evaluate(self, test_data):
         mse = self.model.evaluate(test_data[:, :-1], test_data[:, -1], verbose=0)
         return mse
+
+
+
 
 
 
