@@ -226,7 +226,11 @@ class GoldTradingStrategy(bt.Strategy):
     def trades_count(self):
         return self.num_trades
 
-
+# Define the evaluation function
+def evaluate(net, X_val=X_val, y_val=y_val):
+    y_pred = net.predict(X_val)
+    mse = np.mean((y_pred - y_val)**2)
+    return 1 / mse
 
 # Define the fitness 
 def eval_genomes(genomes, config, checkpointer, p):
