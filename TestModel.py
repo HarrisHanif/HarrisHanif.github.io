@@ -264,8 +264,10 @@ def eval_genomes(genomes, config, checkpointer, p):
     test_data = pd.read_csv('testing_data.csv').drop('Date', axis=1)
     val_data = pd.read_csv('validation_data.csv').drop('Date', axis=1)
 
-    # Normalize the data
+    # Initialize the scaler
     scaler = MinMaxScaler()
+
+    # Normalize the data
     train_data_norm = scaler.fit_transform(train_data)
     test_data_norm = scaler.transform(test_data)  # Transform the test data with the fitted scaler
     val_data_norm = scaler.transform(val_data)
@@ -288,6 +290,7 @@ def eval_genomes(genomes, config, checkpointer, p):
 
     # Save the checkpoint
     checkpointer.save_checkpoint(config, p.population, p.species, p.generation)
+
 
 
 
