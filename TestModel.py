@@ -21,9 +21,10 @@ from neat.genome import DefaultGenome as Genome
 import visualize 
 from neat.checkpoint import Checkpointer
 from keras.models import Sequential, Model
-from keras.layers import Conv1D, MaxPooling1D, LSTM, Dense, Dropout, Input, Activation
+from keras.layers import Conv1D, MaxPooling1D, LSTM, Dense, Dropout, InputLayer, Activation
 from keras.optimizers import Adam
 import gym
+from collections import defaultdict
 
 # Load the data
 train_data = pd.read_csv('training_data.csv').drop('Date', axis=1)
@@ -236,41 +237,48 @@ def evaluate(net, X_val=X_val, y_val=y_val):
 
 
 class KerasModel:
-    
     def __init__(self, genome, config):
-        # Set the input shape
-        input_shape = (len(train_data_norm[0]),)
+        self.genome = genome
+        self.model = Sequential()
 
-        # Create the input layer
-        self.input_layer = Input(shape=input_shape)
+        # Determine the number of outputs for each hidden node
+        hidden_node_outputs = defaultdict(int)
+        for conn in genome.connections.values():
+            if conn.enabled:
+                hidden_node_outputs[conn.out_node] += 1
 
-        # Create a dictionary of hidden layers
+
+        # Add input layer
+        input_shape = (5,)  # Assuming 5 input features
+        self.model.add(InputLayer(input_shape=input_shape))
+
+        # Add hidden layers
         hidden_layers = {}
+        for node_key, node in genome.nodes.items():
+            if node.node_type == 'hidden':
+                num_outputs = hidden_node_outputs[node_key]
+                hidden_layers[node_key] = Dense(units=num_outputs, activation=node.activation, input_shape=input_shape)
 
-        # Add the first hidden layer
-        for node_key in genome.nodes.keys():
-            if node_key == 0:
-                continue
+        # Connect the layers according to the genome's connections
+        for conn in genome.connections.values():
+            if conn.enabled:
+                in_node_key = conn.in_node
+                out_node_key = conn.out_node
 
-            node = genome.nodes[node_key]
+                # Check if the input node is an input node or hidden node
+                if genome.nodes[in_node_key].node_type == 'input':
+                    input_layer = self.model.layers[0]
+                else:
+                    input_layer = hidden_layers[in_node_key]
 
-            # If the node is not enabled, skip it
-            if not getattr(node, 'enabled', True):
-                continue
+                # Connect the layers
+                self.model.add(input_layer)
+                if genome.nodes[out_node_key].node_type != 'output':
+                    self.model.add(hidden_layers[out_node_key])
 
-            # Add the layer to the dictionary of hidden layers
-            hidden_layers[node_key] = Dense(units=node.num_outputs, activation=Activation(node.activation).__name__, input_shape=input_shape)
-
-
-
-
-
-        # Add the hidden layers to the model in the correct order
-        for node_key, layer in sorted(hidden_layers.items()):
-            self.input_layer = layer(self.input_layer)
-
-        # Add the output layer
-        self.output_layer = Dense(1, activation='linear')(self.input_layer)
+        # Add output layer
+        output_activation = 'linear'  # Assuming linear activation for the output layer
+        self.model.add(Dense(units=1, activation=output_activation))
 
         # Create the Keras model
         self.model = Model(inputs=self.input_layer, outputs=self.output_layer)
