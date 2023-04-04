@@ -20,8 +20,9 @@ from neat.genome import DefaultGenome as Genome
 import visualize 
 from neat.checkpoint import Checkpointer
 from keras.models import Sequential
-from keras.layers import LSTM, Dense
-
+from keras.layers import LSTM, Dense, Activation
+from keras.optimizers import Adam
+import gym
 
 # Load the data
 train_data = pd.read_csv('training_data.csv').drop('Date', axis=1)
@@ -80,6 +81,7 @@ history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=50,
 # Evaluate the model on the test data
 mse = model.evaluate(X_test, y_test)
 print(f'Test MSE: {mse}')
+
 
 
 
@@ -249,31 +251,26 @@ def evaluate(net, X_val=X_val, y_val=y_val):
 # Define the fitness 
 def eval_genomes(genomes, config, checkpointer, p):
 
-
     data = pd.read_csv('data3_train.csv')
     scaler = MinMaxScaler()
     data_scaled = scaler.fit_transform(data.iloc[:, 1:])
     trade_penalty_factor = 0.5  # Adjust this value between 0 and 1
     min_trades = 1
     max_consecutive_trades = 3
-    
+
+    input_shape = (data_scaled.shape[1],)
+    output_shape = 2  # Change this based on the number of output classes
+
+    model = KerasModel(input_shape, output_shape)
+
     for genome_id, genome in genomes:
-    
-    
-        if 'holding_position' in data.columns:
-            data_scaled = scaler.fit_transform(data.drop(columns=['holding_position']).iloc[:, 1:])
-    else:
-        data_scaled = scaler.fit_transform(data.iloc[:, 1:])
-    
-    for genome_id, genome in genomes:
-        # Set the default fitness value to None instead of 0
-       
         genome.fitness = 0.0  # Set the initial fitness value to 0
 
-
         net = neat.nn.FeedForwardNetwork.create(genome, config)
+        model.set_weights(net.get_weights())
+
         pl = bt.Cerebro()
-        pl.addstrategy(GoldTradingStrategy, nn=net, scaler=scaler, data=data_scaled)
+        pl.addstrategy(GoldTradingStrategy, nn=model, scaler=scaler, data=data_scaled)
         pl.broker.set_cash(100000)
         pl.broker.setcommission(commission=0.001)
         pl.addsizer(bt.sizers.FixedSize, stake=1000)
@@ -281,16 +278,12 @@ def eval_genomes(genomes, config, checkpointer, p):
         pl.addanalyzer(bt.analyzers.TradeAnalyzer, _name='trades')
         pl.addanalyzer(bt.analyzers.SharpeRatio, _name='sharpe_ratio')
 
-
         try:
             results = pl.run()
         except Exception as e:
             print(f"Error in backtrader execution for genome {genome_id}: {e}")
             genome.fitness = -1
             continue
-        
-        num_trades = 0  # Initialize num_trades with a default value
-
 
         sharpe_ratio = None
         profitable_consecutive_trades = 0
@@ -300,8 +293,6 @@ def eval_genomes(genomes, config, checkpointer, p):
             sharpe_ratio = results[0].analyzers.sharpe.get_analysis()['sharperatio']
             profitable_consecutive_trades = GoldTradingStrategy.calculate_consecutive_trades(results[0], results[0].analyzers.trades, profitable=True)
             unprofitable_consecutive_trades = GoldTradingStrategy.calculate_consecutive_trades(results[0], results[0].analyzers.trades, profitable=False)
-
-
 
         # Penalize for too many consecutive profitable trades
         if profitable_consecutive_trades > max_consecutive_trades:
@@ -315,11 +306,12 @@ def eval_genomes(genomes, config, checkpointer, p):
         else:
             genome.fitness = sharpe_ratio
 
-    # Check for genomes with None fitness or no trades
+        # Check for genomes with None fitness or no trades
         if genome.fitness is None or results[0].analyzers.trades.get_analysis()['total']['total'] == 0:
             genome.fitness = -100
 
-    checkpointer.save_checkpoint(config, p.population, p.species, p.generation)
+        # Save the checkpoint after evaluating each genome
+        checkpointer.save_checkpoint(config, p.population, p.species, p.generation)
 
 
 
