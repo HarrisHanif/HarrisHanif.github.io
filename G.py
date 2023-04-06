@@ -15,6 +15,8 @@ import random
 import sklearn 
 from sklearn import preprocessing, model_selection, metrics
 from sklearn.preprocessing import MinMaxScaler
+import netron 
+
 
 # Preprocessing Continued...
 
@@ -150,6 +152,10 @@ class GoldTradingHyperModel(HyperModel):
         return model
 
 
+timesteps, num_features = X_train.shape[1], X_train.shape[2]
+input_shape = (timesteps, num_features)
+
+
 input_shape = (timesteps, 7)  
 output_shape = 2 
 hypermodel = GoldTradingHyperModel(input_shape, output_shape)
@@ -158,8 +164,8 @@ hypermodel = GoldTradingHyperModel(input_shape, output_shape)
 tuner = RandomSearch(
     hypermodel,
     objective="val_accuracy",
-    max_trials=20,  # You can adjust this based on your computational resources
-    executions_per_trial=2,
+    max_trials=200,  # You can adjust this based on your computational resources
+    executions_per_trial=5,
     directory="gold_trading",
     project_name="gold_trading_hyperparam_tuning",
 )
@@ -173,3 +179,8 @@ tuner.search(
 
 best_model = tuner.get_best_models(num_models=1)[0]
 
+# Save the best model's architecture and weights to a file
+best_model.save("best_model.h5")
+
+# Start the Netron server and open the model
+netron.start("best_model.h5")
