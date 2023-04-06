@@ -71,10 +71,10 @@ output_shape = 2  # 2 for Long_Outcome and Short_Outcome
 
 model = keras.Sequential(
     [
-        layers.GRU(64, input_shape=input_shape, return_sequences=True),
-        layers.LSTM(64),
-        layers.Dense(64, activation="relu"),
-        layers.Dropout(0.5),
+        layers.GRU(128, input_shape=input_shape, return_sequences=True),
+        layers.LSTM(32),
+        layers.Dense(96, activation="relu"),
+        layers.Dropout(0.4),
         layers.Dense(output_shape, activation="sigmoid"),
     ]
 )
