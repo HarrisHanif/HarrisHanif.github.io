@@ -69,12 +69,14 @@ output_shape = 2  # 2 for Long_Outcome and Short_Outcome
 
 model = keras.Sequential(
     [
-        layers.LSTM(64, input_shape=input_shape),
+        layers.GRU(64, input_shape=input_shape, return_sequences=True),
+        layers.LSTM(64),
         layers.Dense(64, activation="relu"),
         layers.Dropout(0.5),
         layers.Dense(output_shape, activation="sigmoid"),
     ]
 )
+
 
 
 # Compile the model with an optimizer, loss function, and metric
@@ -109,3 +111,65 @@ history = model.fit(
     validation_data=validation_data,
     callbacks=[es, mc]
 )
+
+class GoldTradingHyperModel(HyperModel):
+    def __init__(self, input_shape, output_shape):
+        self.input_shape = input_shape
+        self.output_shape = output_shape
+
+    def build(self, hp):
+        model = keras.Sequential(
+            [
+                layers.GRU(
+                    units=hp.Int("gru_units", min_value=32, max_value=128, step=32),
+                    input_shape=self.input_shape,
+                    return_sequences=True,
+                ),
+                layers.LSTM(
+                    units=hp.Int("lstm_units", min_value=32, max_value=128, step=32)
+                ),
+                layers.Dense(
+                    units=hp.Int("dense_units", min_value=32, max_value=128, step=32),
+                    activation="relu",
+                ),
+                layers.Dropout(
+                    hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
+                ),
+                layers.Dense(self.output_shape, activation="sigmoid"),
+            ]
+        )
+
+        model.compile(
+            optimizer=keras.optimizers.Adam(
+                hp.Float("learning_rate", min_value=1e-4, max_value=1e-2, sampling="LOG")
+            ),
+            loss="binary_crossentropy",
+            metrics=["accuracy"],
+        )
+
+        return model
+
+
+input_shape = (timesteps, 7)  
+output_shape = 2 
+hypermodel = GoldTradingHyperModel(input_shape, output_shape)
+
+
+tuner = RandomSearch(
+    hypermodel,
+    objective="val_accuracy",
+    max_trials=20,  # You can adjust this based on your computational resources
+    executions_per_trial=2,
+    directory="gold_trading",
+    project_name="gold_trading_hyperparam_tuning",
+)
+
+tuner.search(
+    X_train,
+    y_train,
+    epochs=20,  # You can adjust this based on your computational resources
+    validation_split=0.2,
+)
+
+best_model = tuner.get_best_models(num_models=1)[0]
+
