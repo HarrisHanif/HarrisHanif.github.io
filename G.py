@@ -76,8 +76,8 @@ model = keras.Sequential(
     [
         layers.GRU(128, input_shape=input_shape, return_sequences=True),
         layers.LSTM(32),
-        layers.Dense(96, activation="relu"),
-        layers.Dropout(0.4),
+        layers.Dense(64, activation="relu"),
+        layers.Dropout(0.1),
         layers.Dense(output_shape, activation="sigmoid"),
     ]
 )
@@ -167,7 +167,7 @@ hypermodel = GoldTradingHyperModel(input_shape, output_shape)
 tuner = RandomSearch(
     hypermodel,
     objective="val_accuracy",
-    max_trials=90,  # You can adjust this based on your computational resources
+    max_trials=250,  # You can adjust this based on your computational resources
     executions_per_trial=5,
     directory="gold_trading",
     project_name="gold_trading_hyperparam_tuning",
@@ -188,54 +188,3 @@ best_model.save("best_model.h5")
 # Start the Netron server and open the model
 netron.start("best_model.h5")
 
-# Genetic Algorithm 
-
-def eval_genomes(genomes, config):
-    for genome_id, genome in genomes:
-        net = neat.nn.FeedForwardNetwork.create(genome, config)
-
-        # Set up variables to store fitness-related information
-        total_profit = 0
-
-        for xi, yi in zip(X_train, y_train):
-            output = net.activate(xi)[0]
-            # Implement your trading strategy here based on the output
-            # Calculate the profit or loss for this trade
-            trade_profit = ...  # Replace with your profit calculation
-
-            total_profit += trade_profit
-
-        genome.fitness = total_profit
-
-
-def run_neat(config_file):
-    config = neat.Config(
-        neat.DefaultGenome,
-        neat.DefaultReproduction,
-        neat.DefaultSpeciesSet,
-        neat.DefaultStagnation,
-        config_file,
-    )
-
-    # Create the population, which is the top-level object for a NEAT run.
-    pop = neat.Population(config)
-
-    # Add a stdout reporter to show progress in the terminal.
-    pop.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
-    pop.add_reporter(stats)
-
-    # Run the genetic algorithm for up to 50 generations.
-    winner = pop.run(eval_genomes, 50)
-
-    return winner
-
-
-# Load the NEAT configuration file and run the genetic algorithm
-local_dir = os.path.dirname(__file__)
-config_path = os.path.join(local_dir, "config")
-winner_genome = run_neat(config_path)
-
-# Save the winner genome to a file
-with open("winner_genome.pkl", "wb") as f:
-    pickle.dump(winner_genome, f)
