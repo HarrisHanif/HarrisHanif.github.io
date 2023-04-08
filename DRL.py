@@ -8,8 +8,24 @@ from keras_tuner import HyperModel, RandomSearch
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
 import netron 
+from sklearn.preprocessing import MinMaxScaler
 
+# Preprocessing Continued...
 
+train_data = pd.read_csv("training_data.csv")
+val_data = pd.read_csv("validation_data.csv")
+test_data = pd.read_csv("testing_data.csv")
+
+# Drop the date column from each dataset
+train_data = train_data.drop("Date", axis=1)
+val_data = val_data.drop("Date", axis=1)
+test_data = test_data.drop("Date", axis=1)
+
+# Scale the input features using MinMaxScaler
+scaler = MinMaxScaler()
+train_data_scaled = scaler.fit_transform(train_data)
+val_data_scaled = scaler.transform(val_data)
+test_data_scaled = scaler.transform(test_data)
 
 
 
