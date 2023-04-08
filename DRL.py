@@ -50,48 +50,45 @@ X_test = X_test.reshape(-1, 7, 1)
 
 
 def build_model(hp):
-    model = Sequential()
-    
-    num_layers = hp.Int('num_layers', min_value=1, max_value=5)
-    layer_types = ['lstm', 'dense', 'conv1d']
-    activations = ['relu', 'tanh', 'softmax']
-    
-    for i in range(num_layers):
-        layer_type = hp.Choice(f'layer_type_{i}', layer_types)
+    num_actions = 3  # Set the number of actions: long, short, do nothing
 
-        if layer_type == 'lstm':
-            model.add(LSTM(units=hp.Int(f'lstm_units_{i}', min_value=16, max_value=128, step=16), 
-                           activation=hp.Choice(f'lstm_activation_{i}', activations), 
-                           return_sequences=i < num_layers - 1))
-        elif layer_type == 'dense':
-            model.add(Dense(units=hp.Int(f'dense_units_{i}', min_value=16, max_value=128, step=16), 
-                            activation=hp.Choice(f'dense_activation_{i}', activations)))
-        elif layer_type == 'conv1d':
-            if i == 0:  # Add input shape for the first layer
-                model.add(Conv1D(filters=hp.Int(f'conv1d_filters_{i}', min_value=16, max_value=128, step=16),
-                                 kernel_size=hp.Int(f'conv1d_kernel_size_{i}', min_value=2, max_value=5, step=1),
-                                 activation=hp.Choice(f'conv1d_activation_{i}', activations),
-                                 input_shape=(7, 1)))
-            else:
-                model.add(Conv1D(filters=hp.Int(f'conv1d_filters_{i}', min_value=16, max_value=128, step=16),
-                                 kernel_size=hp.Int(f'conv1d_kernel_size_{i}', min_value=2, max_value=5, step=1),
-                                 activation=hp.Choice(f'conv1d_activation_{i}', activations)))
-            model.add(MaxPooling1D(pool_size=2))
+    model = keras.Sequential()
+
+    # Add LSTM layers
+    for i in range(hp.Int('num_lstm_layers', 1, 3)):
+        model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=32, max_value=128, step=32),
+                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 3) - 1 else False,
+                                    activation='relu'))
     
-    model.add(Flatten())
-    model.add(Dense(3, activation='softmax'))
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    # Add Dense layers
+    for i in range(hp.Int('num_dense_layers', 1, 4)):
+        model.add(keras.layers.Dense(units=hp.Int('dense_units_' + str(i), min_value=32, max_value=128, step=32),
+                                     activation='relu'))
+        model.add(keras.layers.Dropout(rate=hp.Float('dropout_rate_' + str(i), min_value=0.1, max_value=0.5, step=0.1)))
     
+    # Add output layer
+    model.add(keras.layers.Dense(units=num_actions, activation='softmax'))  # Change activation to 'softmax'
+    
+    # Compile the model
+    model.compile(optimizer=keras.optimizers.Adam(hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='LOG')),
+                  loss='categorical_crossentropy',  # Change loss to 'categorical_crossentropy'
+                  metrics=['categorical_accuracy'])  # Add categorical_accuracy as a metric
+    
+
     return model
+
+
 
 
 tuner = RandomSearch(
     build_model,
-    objective='val_accuracy',
-    max_trials=250,  # Increase the number of trials to explore more configurations
-    executions_per_trial=3,  # Run each trial multiple times and average the results
-    directory='random_search_logs',
-    project_name='gold_trading'
+    objective='val_categorical_accuracy',  # Change objective to 'val_categorical_accuracy'
+    max_trials=2,
+    executions_per_trial=3,
+    directory='output',
+    project_name='DRL',
+    overwrite=True,
+    seed=42,
 )
 
 tuner.search(
@@ -114,7 +111,8 @@ history = best_model.fit(
     y_train,
     epochs=100,
     validation_data=(X_val, y_val),
-    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)]
+    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)],
+    metrics=['categorical_accuracy']  # Add categorical_accuracy as a metric
 )
 
 
