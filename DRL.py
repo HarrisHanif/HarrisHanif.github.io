@@ -5,10 +5,16 @@ import tensorflow as tf
 import keras 
 import keras_tuner
 from keras_tuner import HyperModel, RandomSearch
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
+from keras.callbacks import TensorBoard
+from keras.utils import plot_model
+import datetime 
 import netron 
 from sklearn.preprocessing import MinMaxScaler
+import pydot
+import graphviz 
+
 
 # Preprocessing Continued...
 
@@ -78,10 +84,11 @@ def build_model(hp):
     
     return model
 
+
 tuner = RandomSearch(
     build_model,
     objective='val_accuracy',
-    max_trials=5,  # Increase the number of trials to explore more configurations
+    max_trials=250,  # Increase the number of trials to explore more configurations
     executions_per_trial=3,  # Run each trial multiple times and average the results
     directory='random_search_logs',
     project_name='gold_trading'
@@ -94,12 +101,26 @@ tuner.search(
     validation_split=0.2,
 )
 
+# Get the best hyperparameters found by the tuner
+best_hp = tuner.get_best_hyperparameters(1)[0]
+
 
 
 best_model = tuner.get_best_models(num_models=1)[0]
+
+# Train the best model using the training and validation data
+history = best_model.fit(
+    X_train,
+    y_train,
+    epochs=100,
+    validation_data=(X_val, y_val),
+    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)]
+)
+
 
 # Save the best model's architecture and weights to a file
 best_model.save("best_model.h5")
 
 # Start the Netron server and open the model
 netron.start("best_model.h5")
+
