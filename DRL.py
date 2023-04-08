@@ -27,6 +27,20 @@ train_data_scaled = scaler.fit_transform(train_data)
 val_data_scaled = scaler.transform(val_data)
 test_data_scaled = scaler.transform(test_data)
 
+# Split input features (X) and target outputs (y)
+X_train = train_data.drop(columns=['Long_Outcome', 'Short_Outcome', 'Do_Nothing']).values
+y_train = train_data[['Long_Outcome', 'Short_Outcome', 'Do_Nothing']].values
+
+X_val = val_data.drop(columns=['Long_Outcome', 'Short_Outcome', 'Do_Nothing']).values
+y_val = val_data[['Long_Outcome', 'Short_Outcome', 'Do_Nothing']].values
+
+X_test = test_data.drop(columns=['Long_Outcome', 'Short_Outcome', 'Do_Nothing']).values
+y_test = test_data[['Long_Outcome', 'Short_Outcome', 'Do_Nothing']].values
+
+# Reshape the input data to have a shape of (7, 1) to match the input shape required by the Conv1D layers
+X_train = X_train.reshape(-1, 7, 1)
+X_val = X_val.reshape(-1, 7, 1)
+X_test = X_test.reshape(-1, 7, 1)
 
 
 def build_model(hp):
@@ -67,7 +81,7 @@ def build_model(hp):
 tuner = RandomSearch(
     build_model,
     objective='val_accuracy',
-    max_trials=20,  # Increase the number of trials to explore more configurations
+    max_trials=5,  # Increase the number of trials to explore more configurations
     executions_per_trial=3,  # Run each trial multiple times and average the results
     directory='random_search_logs',
     project_name='gold_trading'
@@ -79,6 +93,8 @@ tuner.search(
     epochs=20,  # You can adjust this based on your computational resources
     validation_split=0.2,
 )
+
+
 
 best_model = tuner.get_best_models(num_models=1)[0]
 
