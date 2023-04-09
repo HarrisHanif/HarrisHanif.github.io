@@ -60,7 +60,7 @@ class F1Score(tf.keras.metrics.Metric):
         y_true = tf.argmax(y_true, axis=1)
         y_pred = tf.argmax(y_pred, axis=1)
         cm = tf.math.confusion_matrix(y_true, y_pred, num_classes=3)
-        self.true_positives.assign_add(tf.linalg.diag_part(cm))
+        self.true_positives.assign_add(tf.cast(tf.linalg.diag_part(cm), tf.float32))
         self.false_positives.assign_add(tf.reduce_sum(cm, axis=0) - tf.linalg.diag_part(cm))
         self.false_negatives.assign_add(tf.reduce_sum(cm, axis=1) - tf.linalg.diag_part(cm))
 
@@ -74,9 +74,6 @@ class F1Score(tf.keras.metrics.Metric):
         self.true_positives.assign(0)
         self.false_positives.assign(0)
         self.false_negatives.assign(0)
-
-
-
 
 
 
@@ -132,6 +129,10 @@ tuner.search(
 # Get the best hyperparameters found by the tuner
 best_hp = tuner.get_best_hyperparameters(1)[0]
 
+if tuner.oracle.get_best_trials(num_trials=1)[0].score is not None:
+    best_model = tuner.get_best_models(num_models=1)[0]
+else:
+    print("No successful trials")
 
 
 best_model = tuner.get_best_models(num_models=1)[0]
