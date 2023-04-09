@@ -97,10 +97,12 @@ def build_model(hp):
     # Add output layer
     model.add(keras.layers.Dense(units=num_actions, activation='softmax'))  # Change activation to 'softmax'
     
-    # Compile the model
-    model.compile(optimizer=keras.optimizers.Adam(hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='LOG')),
-                  loss='categorical_crossentropy',  # Change loss to 'categorical_crossentropy'
-                  metrics=[F1Score()])  
+    model.compile(
+    optimizer=keras.optimizers.Adam(learning_rate=hp.Float("learning_rate", 1e-4, 1e-2, sampling="log")),
+    loss="sparse_categorical_crossentropy",
+    metrics=[tf.keras.metrics.SparseCategoricalAccuracy(name="accuracy"), weighted_f1_score(num_classes=3, name="f1_score")],
+)
+
     
 
     return model
@@ -110,7 +112,7 @@ def build_model(hp):
 
 tuner = RandomSearch(
     build_model,
-     objective=keras_tuner.Objective("val_f1_score", direction="max"),
+    objective=keras_tuner.Objective("val_f1_score", direction="max"),
     max_trials=2,
     executions_per_trial=3,
     directory='output',
@@ -152,7 +154,8 @@ history = best_model.fit(
     y_train,
     epochs=100,
     validation_data=(X_val, y_val),
-    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10), model_checkpoint]
+    callbacks=[tf.keras.callbacks.EarlyStopping(monitor="val_f1_score", patience=5, mode="max", restore_best_weights=True)]
+
 )
 
 # Load the best model
