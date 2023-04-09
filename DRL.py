@@ -12,6 +12,7 @@ from keras.utils import plot_model
 import datetime 
 import netron 
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import confusion_matrix, f1_score
 import pydot
 import graphviz 
 
@@ -48,6 +49,36 @@ X_train = X_train.reshape(-1, 7, 1)
 X_val = X_val.reshape(-1, 7, 1)
 X_test = X_test.reshape(-1, 7, 1)
 
+class F1Score(tf.keras.metrics.Metric):
+    def __init__(self, name="f1_score", **kwargs):
+        super(F1Score, self).__init__(name=name, **kwargs)
+        self.true_positives = self.add_weight(name="tp", initializer="zeros")
+        self.false_positives = self.add_weight(name="fp", initializer="zeros")
+        self.false_negatives = self.add_weight(name="fn", initializer="zeros")
+
+    def update_state(self, y_true, y_pred, sample_weight=None):
+        y_true = tf.argmax(y_true, axis=1)
+        y_pred = tf.argmax(y_pred, axis=1)
+        cm = tf.math.confusion_matrix(y_true, y_pred, num_classes=3)
+        self.true_positives.assign_add(tf.linalg.diag_part(cm))
+        self.false_positives.assign_add(tf.reduce_sum(cm, axis=0) - tf.linalg.diag_part(cm))
+        self.false_negatives.assign_add(tf.reduce_sum(cm, axis=1) - tf.linalg.diag_part(cm))
+
+    def result(self):
+        precision = self.true_positives / (self.true_positives + self.false_positives)
+        recall = self.true_positives / (self.true_positives + self.false_negatives)
+        f1 = 2 * (precision * recall) / (precision + recall)
+        return tf.reduce_mean(f1)
+
+    def reset_states(self):
+        self.true_positives.assign(0)
+        self.false_positives.assign(0)
+        self.false_negatives.assign(0)
+
+
+
+
+
 
 def build_model(hp):
     num_actions = 3  # Set the number of actions: long, short, do nothing
@@ -72,7 +103,7 @@ def build_model(hp):
     # Compile the model
     model.compile(optimizer=keras.optimizers.Adam(hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='LOG')),
                   loss='categorical_crossentropy',  # Change loss to 'categorical_crossentropy'
-                  metrics=['categorical_accuracy'])  # Add categorical_accuracy as a metric
+                  metrics=[F1Score()])  
     
 
     return model
@@ -82,7 +113,7 @@ def build_model(hp):
 
 tuner = RandomSearch(
     build_model,
-    objective='val_categorical_accuracy',  # Change objective to 'val_categorical_accuracy'
+     objective=keras_tuner.Objective("val_f1_score", direction="max"),
     max_trials=2,
     executions_per_trial=3,
     directory='output',
