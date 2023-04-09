@@ -8,7 +8,7 @@ from keras_tuner import HyperModel, RandomSearch
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
 from keras.callbacks import TensorBoard, ModelCheckpoint
-from keras.utils import plot_model
+from keras.utils import plot_model, to_categorical
 from keras import backend as K
 import datetime 
 import netron 
@@ -115,7 +115,8 @@ def build_model(hp):
     model.compile(
     optimizer=keras.optimizers.Adam(learning_rate=hp.Float("learning_rate", 1e-4, 1e-2, sampling="log")),
     loss="sparse_categorical_crossentropy",
-    metrics=[tf.keras.metrics.SparseCategoricalAccuracy(name="accuracy"), weighted_f1_score(num_classes=3, name="f1_score")],
+    metrics=[tf.keras.metrics.CategoricalAccuracy(name="accuracy"), weighted_f1_score],
+
 )
 
     
