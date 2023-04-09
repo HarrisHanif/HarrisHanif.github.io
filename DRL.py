@@ -9,6 +9,7 @@ from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
 from keras.callbacks import TensorBoard, ModelCheckpoint
 from keras.utils import plot_model
+from keras import backend as K
 import datetime 
 import netron 
 from sklearn.preprocessing import MinMaxScaler
@@ -16,6 +17,19 @@ from sklearn.metrics import confusion_matrix, f1_score
 import pydot
 import graphviz 
 
+
+
+def weighted_f1_score(y_true, y_pred):
+    y_true_class = K.argmax(y_true, axis=-1)
+    y_pred_class = K.argmax(y_pred, axis=-1)
+    y_true_class = K.eval(y_true_class)
+    y_pred_class = K.eval(y_pred_class)
+
+    cm = confusion_matrix(y_true_class, y_pred_class)
+    weights = cm.sum(axis=1) / cm.sum()
+    f1_scores = f1_score(y_true_class, y_pred_class, average=None)
+
+    return np.average(f1_scores, weights=weights)
 
 # Preprocessing Continued...
 
@@ -75,6 +89,7 @@ class F1Score(tf.keras.metrics.Metric):
         self.false_positives.assign(0)
         self.false_negatives.assign(0)
 
+      
 
 
 def build_model(hp):
