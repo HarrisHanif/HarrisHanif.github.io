@@ -7,7 +7,7 @@ import keras_tuner
 from keras_tuner import HyperModel, RandomSearch
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
-from keras.callbacks import TensorBoard
+from keras.callbacks import TensorBoard, ModelCheckpoint
 from keras.utils import plot_model
 import datetime 
 import netron 
@@ -105,19 +105,27 @@ best_hp = tuner.get_best_hyperparameters(1)[0]
 
 best_model = tuner.get_best_models(num_models=1)[0]
 
+# Set up the ModelCheckpoint callback
+model_checkpoint = ModelCheckpoint(
+    "best_model.h5",
+    monitor="val_loss",
+    save_best_only=True,
+    mode="min",
+    verbose=1,
+)
+
 # Train the best model using the training and validation data
 history = best_model.fit(
     X_train,
     y_train,
     epochs=100,
     validation_data=(X_val, y_val),
-    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)],
-    metrics=['categorical_accuracy']  # Add categorical_accuracy as a metric
+    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10), model_checkpoint]
 )
 
+# Load the best model
+best_model = load_model("best_model.h5")
 
-# Save the best model's architecture and weights to a file
-best_model.save("best_model.h5")
 
 # Start the Netron server and open the model
 netron.start("best_model.h5")
