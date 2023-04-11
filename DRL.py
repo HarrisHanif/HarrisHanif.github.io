@@ -4,10 +4,13 @@ import gym
 import tensorflow as tf 
 import keras 
 import keras_tuner
+from keras import layers
+from keras.layers import Rescaling, Layer
 from keras_tuner import HyperModel, RandomSearch
-from keras.models import Sequential, load_model
-from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten
+from keras.models import Sequential, load_model, Model
+from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten, Input, MultiHeadAttention 
 from keras.callbacks import TensorBoard, ModelCheckpoint
+from keras.optimizers import Adam
 from keras.utils import plot_model
 import datetime 
 import netron 
@@ -49,16 +52,20 @@ X_val = X_val.reshape(-1, 7, 1)
 X_test = X_test.reshape(-1, 7, 1)
 
 
+
 def build_model(hp):
     num_actions = 3  # Set the number of actions: long, short, do nothing
 
     model = keras.Sequential()
 
+    # Add Input layer
+    model.add(keras.layers.Input(shape=(None,7), dtype="float32"))
+
     # Add LSTM layers
     for i in range(hp.Int('num_lstm_layers', 1, 3)):
         model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=32, max_value=128, step=32),
                                     return_sequences=True if i < hp.Int('num_lstm_layers', 1, 3) - 1 else False,
-                                    activation='relu'))
+                                    activation='tanh'))  # Change activation to 'tanh'
     
     # Add Dense layers
     for i in range(hp.Int('num_dense_layers', 1, 4)):
@@ -73,9 +80,11 @@ def build_model(hp):
     model.compile(optimizer=keras.optimizers.Adam(hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='LOG')),
                   loss='categorical_crossentropy',  # Change loss to 'categorical_crossentropy'
                   metrics=['categorical_accuracy'])  # Add categorical_accuracy as a metric
-    
 
     return model
+
+
+
 
 
 
