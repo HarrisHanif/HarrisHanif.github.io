@@ -59,7 +59,7 @@ def build_model(hp):
     model = keras.Sequential()
 
     # Add Input layer
-    model.add(keras.layers.Input(shape=(None,7), dtype="float32"))
+    model.add(keras.layers.Input(shape=(7,1), dtype="float32"))
 
     # Add LSTM layers
     for i in range(hp.Int('num_lstm_layers', 1, 3)):
