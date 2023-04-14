@@ -16,6 +16,9 @@ import datetime
 import netron 
 from sklearn.preprocessing import MinMaxScaler
 import pydot
+import os 
+
+
 
 
 
@@ -62,14 +65,14 @@ def build_model(hp):
     model.add(keras.layers.Input(shape=(7,1), dtype="float32"))
 
     # Add LSTM layers
-    for i in range(hp.Int('num_lstm_layers', 1, 3)):
-        model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=32, max_value=128, step=32),
-                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 3) - 1 else False,
+    for i in range(hp.Int('num_lstm_layers', 1, 7)):
+        model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=64, max_value=256, step=32),
+                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 7) - 1 else False,
                                     activation='tanh'))  # Change activation to 'tanh'
     
     # Add Dense layers
-    for i in range(hp.Int('num_dense_layers', 1, 4)):
-        model.add(keras.layers.Dense(units=hp.Int('dense_units_' + str(i), min_value=32, max_value=128, step=32),
+    for i in range(hp.Int('num_dense_layers', 1, 3)):
+        model.add(keras.layers.Dense(units=hp.Int('dense_units_' + str(i), min_value=64, max_value=256, step=32),
                                      activation='relu'))
         model.add(keras.layers.Dropout(rate=hp.Float('dropout_rate_' + str(i), min_value=0.1, max_value=0.5, step=0.1)))
     
@@ -84,32 +87,44 @@ def build_model(hp):
     return model
 
 
-
-
+project_dir = 'output'
+project_name = 'DRL'
 
 
 
 tuner = RandomSearch(
     build_model,
     objective='val_categorical_accuracy',  # Change objective to 'val_categorical_accuracy'
-    max_trials=50,
+    max_trials=20,
     executions_per_trial=3,
-    directory='output',
-    project_name='DRL',
+    directory=project_dir,
+    project_name=project_name,
     overwrite=True,
     seed=42,
 )
 
-tuner.search(
-    X_train,
-    y_train,
-    epochs=20,  # You can adjust this based on your computational resources
-    validation_split=0.2,
-)
+# Load existing trials and best hyperparameters
+if os.path.exists(os.path.join(project_dir, project_name)):
+    tuner.reload()
+    best_hp = tuner.get_best_hyperparameters()[0]
+    print("Loaded best hyperparameters:", best_hp)
+else:
+    print("No previous trials found, starting new search.")
+    best_hp = None
+
+# Run the search only if no previous trials were found
+if best_hp is None:
+    tuner.search(
+        X_train,
+        y_train,
+        epochs=100,
+        validation_split=0.2,
+    )
+
 
 # Get the best hyperparameters found by the tuner
-best_hp = tuner.get_best_hyperparameters(1)[0]
-
+if best_hp is None:
+    best_hp = tuner.get_best_hyperparameters(1)[0]
 
 
 best_model = tuner.get_best_models(num_models=1)[0]
@@ -127,7 +142,7 @@ model_checkpoint = ModelCheckpoint(
 history = best_model.fit(
     X_train,
     y_train,
-    epochs=100,
+    epochs=50,
     validation_data=(X_val, y_val),
     callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10), model_checkpoint]
 )
