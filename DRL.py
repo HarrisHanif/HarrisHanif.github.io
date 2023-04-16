@@ -55,13 +55,22 @@ X_val = X_val.reshape(-1, 7, 1)
 X_test = X_test.reshape(-1, 7, 1)
 
 def f1(y_true, y_pred):
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    precision = true_positives / (predicted_positives + K.epsilon())
-    recall = true_positives / (possible_positives + K.epsilon())
-    f1_val = 2 * (precision * recall) / (precision + recall + K.epsilon())
-    return f1_val
+    def recall(y_true, y_pred):
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+        recall = true_positives / (possible_positives + K.epsilon())
+        return recall
+
+    def precision(y_true, y_pred):
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+        precision = true_positives / (predicted_positives + K.epsilon())
+        return precision
+
+    precision = precision(y_true, y_pred)
+    recall = recall(y_true, y_pred)
+    return 2 * ((precision * recall) / (precision + recall + K.epsilon()))
+
 
 
 def build_model(hp):
@@ -75,16 +84,16 @@ def build_model(hp):
     l2_lambda_value = hp.Float('l2_lambda_value', min_value=1e-5, max_value=1e-3, sampling='LOG')
 
     # Add LSTM layers
-    for i in range(hp.Int('num_lstm_layers', 1, 5)):
+    for i in range(hp.Int('num_lstm_layers', 5, 30)):
         model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=64, max_value=256, step=32),
-                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 5) - 1 else False,
+                                    return_sequences=True if i < hp.Int('num_lstm_layers', 5, 30) - 1 else False,
                                     activation='tanh',  # Change activation to 'tanh'
                                     kernel_regularizer=l2(l2_lambda_value),
                                     recurrent_regularizer=l2(l2_lambda_value),
                                     bias_regularizer=l2(l2_lambda_value)))
     
     # Add Dense layers
-    for i in range(hp.Int('num_dense_layers', 1, 3)):
+    for i in range(hp.Int('num_dense_layers', 1, 20)):
         model.add(keras.layers.Dense(units=hp.Int('dense_units_' + str(i), min_value=64, max_value=256, step=32),
                                  activation='relu',
                                  kernel_regularizer=l2(l2_lambda_value)))
@@ -110,7 +119,7 @@ project_name = 'DRL'
 tuner = RandomSearch(
     build_model,
     objective=Objective("val_f1", direction="max"),  # Update the objective to 'val_f1' with direction 'max'
-    max_trials=20,
+    max_trials=100,
     executions_per_trial=3,
     directory=project_dir,
     project_name=project_name,
@@ -163,7 +172,8 @@ history = best_model.fit(
 )
 
 # Load the best model
-best_model = load_model("best_model.h5")
+best_model = load_model("best_model.h5", custom_objects={'f1': f1})
+
 
 
 # Start the Netron server and open the model
