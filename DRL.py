@@ -6,20 +6,20 @@ import keras
 import keras_tuner
 from keras import layers
 from keras.layers import Rescaling, Layer
-from keras_tuner import HyperModel, RandomSearch
+from keras_tuner import HyperModel, RandomSearch, Objective
 from keras.models import Sequential, load_model, Model
 from keras.layers import LSTM, Dense, Conv1D, MaxPooling1D, Dropout, Flatten, Input, MultiHeadAttention 
 from keras.callbacks import TensorBoard, ModelCheckpoint
 from keras.optimizers import Adam
 from keras.utils import plot_model
+from keras.regularizers import l2
+from keras import backend as K
 import datetime 
 import netron 
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import f1_score
 import pydot
 import os 
-
-
-
 
 
 # Preprocessing Continued...
@@ -54,6 +54,14 @@ X_train = X_train.reshape(-1, 7, 1)
 X_val = X_val.reshape(-1, 7, 1)
 X_test = X_test.reshape(-1, 7, 1)
 
+def f1(y_true, y_pred):
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    precision = true_positives / (predicted_positives + K.epsilon())
+    recall = true_positives / (possible_positives + K.epsilon())
+    f1_val = 2 * (precision * recall) / (precision + recall + K.epsilon())
+    return f1_val
 
 
 def build_model(hp):
@@ -64,27 +72,34 @@ def build_model(hp):
     # Add Input layer
     model.add(keras.layers.Input(shape=(7,1), dtype="float32"))
 
+    l2_lambda_value = hp.Float('l2_lambda_value', min_value=1e-5, max_value=1e-3, sampling='LOG')
+
     # Add LSTM layers
-    for i in range(hp.Int('num_lstm_layers', 1, 7)):
+    for i in range(hp.Int('num_lstm_layers', 1, 5)):
         model.add(keras.layers.LSTM(units=hp.Int('lstm_units_' + str(i), min_value=64, max_value=256, step=32),
-                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 7) - 1 else False,
-                                    activation='tanh'))  # Change activation to 'tanh'
+                                    return_sequences=True if i < hp.Int('num_lstm_layers', 1, 5) - 1 else False,
+                                    activation='tanh',  # Change activation to 'tanh'
+                                    kernel_regularizer=l2(l2_lambda_value),
+                                    recurrent_regularizer=l2(l2_lambda_value),
+                                    bias_regularizer=l2(l2_lambda_value)))
     
     # Add Dense layers
     for i in range(hp.Int('num_dense_layers', 1, 3)):
         model.add(keras.layers.Dense(units=hp.Int('dense_units_' + str(i), min_value=64, max_value=256, step=32),
-                                     activation='relu'))
-        model.add(keras.layers.Dropout(rate=hp.Float('dropout_rate_' + str(i), min_value=0.1, max_value=0.5, step=0.1)))
-    
+                                 activation='relu',
+                                 kernel_regularizer=l2(l2_lambda_value)))
+    model.add(keras.layers.Dropout(rate=hp.Float('dropout_rate_' + str(i), min_value=0.1, max_value=0.5, step=0.1)))
+
     # Add output layer
     model.add(keras.layers.Dense(units=num_actions, activation='softmax'))  # Change activation to 'softmax'
     
     # Compile the model
     model.compile(optimizer=keras.optimizers.Adam(hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='LOG')),
                   loss='categorical_crossentropy',  # Change loss to 'categorical_crossentropy'
-                  metrics=['categorical_accuracy'])  # Add categorical_accuracy as a metric
+                  metrics=['accuracy', f1])  
 
     return model
+
 
 
 project_dir = 'output'
@@ -94,7 +109,7 @@ project_name = 'DRL'
 
 tuner = RandomSearch(
     build_model,
-    objective='val_categorical_accuracy',  # Change objective to 'val_categorical_accuracy'
+    objective=Objective("val_f1", direction="max"),  # Update the objective to 'val_f1' with direction 'max'
     max_trials=20,
     executions_per_trial=3,
     directory=project_dir,
@@ -117,7 +132,7 @@ if best_hp is None:
     tuner.search(
         X_train,
         y_train,
-        epochs=100,
+        epochs=75,
         validation_split=0.2,
     )
 
@@ -132,9 +147,9 @@ best_model = tuner.get_best_models(num_models=1)[0]
 # Set up the ModelCheckpoint callback
 model_checkpoint = ModelCheckpoint(
     "best_model.h5",
-    monitor="val_loss",
+    monitor="val_f1",
     save_best_only=True,
-    mode="min",
+    mode="max",
     verbose=1,
 )
 
@@ -142,9 +157,9 @@ model_checkpoint = ModelCheckpoint(
 history = best_model.fit(
     X_train,
     y_train,
-    epochs=50,
+    epochs=75,
     validation_data=(X_val, y_val),
-    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10), model_checkpoint]
+    callbacks=[tf.keras.callbacks.EarlyStopping(monitor='val_f1', patience=10), model_checkpoint]
 )
 
 # Load the best model
